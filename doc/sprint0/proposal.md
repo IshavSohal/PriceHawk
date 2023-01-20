@@ -45,6 +45,7 @@ Hosting if required: aws, azure, heroku
 ## Cinerama, *the new domain for your favourite movie and tv shows*
 
 #### Problem Statement and Solution
+The vast majority of individuals who enjoy watching media spend excessive amounts of time trying to decide what they want to watch. They constantly sift thought the abundance of choices avaibable to them, varying in genre(action, adventure, horror, thriller, comedy, etc.) as well as the type of media (movie, tv-show, documentary, docu-series, etc.).
 
 #### Key Users
 
