@@ -40,3 +40,18 @@ Possible tech stack:
 Frontend: typescript, react
 Backend: python, django/flask/fastapi, postgresql/mongodb/dynamodb,
 Hosting if required: aws, azure, heroku
+
+
+## Cinerama, *the new domain for your favourite movie and tv shows*
+
+#### Problem Statement and Solution
+
+#### Key Users
+
+#### Scenarios
+
+#### Market Sizing Analysis and Business Potential
+
+#### Principles
+
+#### Feasibility
