@@ -8,3 +8,5 @@
 |Mustafa Irfan|1006455373|irfanmus |mustafa.irfan@mail.utoronto.ca |6476760012|Moose1#1467|
 
 **Discord Chat/Server Invite :** https://discord.gg/CjdGdaWH
+
+**Trello Invite :** https://trello.com/invite/wooftrails/ATTIfa477d00c06b1882259f780bfcfab834134356A1
