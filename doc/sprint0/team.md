@@ -7,6 +7,6 @@
 |Justin Harrison|harri444|1002994281|justin.harrison@mail.utoronto.ca|6139812840|Potato Diet#8800|
 |Mustafa Irfan|1006455373|irfanmus |mustafa.irfan@mail.utoronto.ca |6476760012|Moose1#1467|
 
-**Discord Chat/Server Invite :** https://discord.gg/CjdGdaWH
+**Discord Chat/Server Invite :** https://discord.gg/w4WBfhrdHq
 
 **Trello Invite :** https://trello.com/invite/wooftrails/ATTIfa477d00c06b1882259f780bfcfab834134356A1
