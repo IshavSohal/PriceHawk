@@ -6,3 +6,5 @@
 |Ishav Sohal|sohalish|1007192618|ishav.sohal@mail.utoronto.ca|6477872609|Ishav Sohal#9043|
 |Justin Harrison|harri444|1002994281|justin.harrison@mail.utoronto.ca|6139812840|Potato Diet#8800|
 |Mustafa Irfan|1006455373|irfanmus |mustafa.irfan@mail.utoronto.ca |6476760012|Moose1#1467|
+
+**Discord Chat/Server Invite :** https://discord.gg/CjdGdaWH
