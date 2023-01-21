@@ -60,3 +60,26 @@ People who enjoy watching movies/tv-shows/documentaries, but are indecisive and/
 We believe this idea is feasible, and can be completed in the timeframe of this course
 We can use The Movie DB to build a collection of movies and tv shows, and scrap IMDB + Rotten Tomatoes / wherever else to get user ratings which we’ll use for recommendations.
 Jellyfin / Plex have a plugin system which we can leverage to show recommendations in the app.
+
+## Medical World, *easy access to medical knowledge*
+
+#### Problem Statement and Solution
+Many people have health related problems but the medical world is vast which leaves an ordinary person who does not know much lost as to where to start and give up trying to learn more. The internet provides too many resources for a regular person to pick leaving them to pick no sources or the ones that show up first in the search results. This can lead to inaccurate results if they need to know something that is considered obsure in the medical field. A solution would an app with all the information available at the tips of anyone's fingers. This app would be able to diagnose problems and provide the next steps a person would need to take. The app would also display the severity level of an illness and show the chances of an illness matching symptoms. This would help any decision paralysis that could occur. There could optionally provide medical news to help people know what is going in the medical workld. This could also help people in a medical profession with making their lives by helping with diagnosis and treatmnet. 
+
+#### Key Users
+<ins>Ordinary People</ins>: The general population that doesn't have extensive knowledge about medical fields
+<ins>Medical Professional</ins>: People in medical fields
+
+#### Scenarios
+- As a user, I am able to designate symptoms which can allow me to view the possible conditions the symptoms connect to with varying percentages.
+- As a user, I can know what steps I should take if I get or have a medical condition.
+- As a user, I can see the news articles about the topics in the medical world I want to see.
+
+#### Market Sizing Analysis and Business Potential
+TODO
+
+#### Principles
+TODO
+
+#### Feasibility
+Might be feasible by getting a list of diseases and symptoms from a public database and putting that into a new database and query the database for searching for medical conditions.  
