@@ -40,3 +40,23 @@ Possible tech stack:
 Frontend: typescript, react
 Backend: python, django/flask/fastapi, postgresql/mongodb/dynamodb,
 Hosting if required: aws, azure, heroku
+
+
+## Cinerama, *the new domain for your favourite movies and tv shows*
+
+#### Problem Statement and Solution
+The vast majority of individuals who enjoy watching media spend excessive amounts of time trying to decide what they want to watch. They constantly sift thought the abundance of choices avaibable to them, varying in genre(action, adventure, horror, thriller, comedy, etc.) as well as the type of media (movie, tv-show, documentary, docu-series, etc.). A solution to this problem would be a Movie recommendation system. Although a variety of movie recommendation systems currently exist, they either are limited to one platform, or are not adequate to fulfill the needs of the target audience. Our goal is to create such a system that includes media for a wide range of streaming services/platforms, and proves users with convenient methods for filtering the media they see. We plan to integrate Plex / Jellyfin with our website to provide users with the ability to stream the media they choose as well. 
+
+#### Key Users
+People who enjoy watching movies/tv-shows/documentaries, but are indecisive and/or get overwhelmed by other recommendation systems. This applies to a wide variety of the demographic, as people of all age groups, gender, and social classes tend to experience this problem.
+
+#### Scenarios
+- A user is browsing Netflix/Amazon Prime/(any other streaming service) and just cannnot make a descision on what they should watch. They are overwhelmed by the excessive amounts of choices that are in front of them. Instead of wasting more time experiencing decision paralysis, they enter out website, where they first must carefully decide what kind of media they want to watch and what genre they are in the mood for. From there, only the media content that pertains to their selections will appear in front of them, making it much less overwhelming to choose what they want to watch
+#### Market Sizing Analysis and Business Potential
+
+#### Principles
+
+#### Feasibility
+We believe this idea is feasible, and can be completed in the timeframe of this course
+We can use The Movie DB to build a collection of movies and tv shows, and scrap IMDB + Rotten Tomatoes / wherever else to get user ratings which we’ll use for recommendations.
+Jellyfin / Plex have a plugin system which we can leverage to show recommendations in the app.
