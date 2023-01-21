@@ -68,7 +68,9 @@ Many people have health related problems but the medical world is vast which lea
 
 #### Key Users
 <ins>Ordinary People</ins>: The general population that doesn't have extensive knowledge about medical fields
-<ins>Medical Professional</ins>: People in medical fields
+
+
+<ins>Medical Professionals</ins>: People in medical fields
 
 #### Scenarios
 - As a user, I am able to designate symptoms which can allow me to view the possible conditions the symptoms connect to with varying percentages.
@@ -82,4 +84,4 @@ TODO
 TODO
 
 #### Feasibility
-Might be feasible by getting a list of diseases and symptoms from a public database and putting that into a new database and query the database for searching for medical conditions.  
+Might be feasible by getting a list of diseases and symptoms from a public database and putting that into a new database and query the database for searching for medical conditions. There would need to be a certification for correct information and maybe other certifications which could lead to this not being feasible.
