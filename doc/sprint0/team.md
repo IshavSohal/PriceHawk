@@ -10,3 +10,5 @@
 **Discord Chat/Server Invite :** https://discord.gg/w4WBfhrdHq
 
 **Trello Invite :** https://trello.com/invite/wooftrails/ATTIfa477d00c06b1882259f780bfcfab834134356A1
+
+**We want our first draft graded**
