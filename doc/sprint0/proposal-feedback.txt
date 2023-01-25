@@ -1,0 +1,14 @@
+* Interesting idea overall. However, this idea is not novel. Take the apps “Rover”  or “spotdogwalkers.com” or for example, what will make users want to user your application instead? What features/improvements will you bring that incentivises the use of your app over these alternatives?
+* In regards to the specifics you provided, what does it mean for someone to be “background checked”? How are you going to implement this “background check” process? I feel like people generally wouldn't want to go through a background check just to walk a dog (but I guess it depends on how thorough and demanding this process is). 
+* When you say “..all a client has to do is press a button that (in real time) connects them to a dog walker (that is also searching for a client in real time)”. What happens if a user is searching for a dog walker, but no dog walker is currently searching for a client “in real time”? This could be a huge issue especially when you are initially growing the user base for your app. 
+      * You would want to justify why this needs to happen in real time and consider the upsides/downsides of doing it this way. Do you really need to change the way the “dog walking model” works (i.e find a posting for a dog walker, schedule an appointment with them, etc) ? Is dog walking really that spontaneous of an activity where you need to get matched up instantaneously  (like an Uber ride for example). 
+* Good job on the thorough and detailed market analysis, however you didn’t list any competitors in your target market!
+* You want to be more detailed and specific with your user descriptions though in your final draft of your proposal. Additionally, in your final draft make sure you finalize the details of your tech stack. 
+        
+Cinerama:
+* Overall cool idea, but not too convinced that there is a strong demand for this type of app. For example, what if users are only subscribed to one streaming service. Why would users want to use your recommendation system rather than the one that is already built into their own streaming service? How are you going to make your recommendation system better than each streaming service’s own solution? 
+* Also, what stops users from just typing in “recommend me <genre> movies/shows to watch [on <streaming service>]” in google? I personally do this all the time and don’t really desire a separate app to do this.
+* How are you going to get your preference data (i.e activity stream) for each user? 
+
+
+Overall, I think there is potential with these two ideas but you may need to flesh out the specifics a bit more and think of ways to differentiate your app from existing services! 
