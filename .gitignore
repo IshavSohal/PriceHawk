@@ -1,4 +1,3 @@
 node_modules
 **/public/*.js
 **/venv
-**/__init__.py
