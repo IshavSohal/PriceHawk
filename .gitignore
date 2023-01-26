@@ -1,3 +1,4 @@
 node_modules
 **/public/*.js
 **/venv
+**/__pycache__
