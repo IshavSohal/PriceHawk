@@ -22,7 +22,7 @@ Amazon.
     npm install
 
 Within Chrome, goto chrome://extensions/, click "Load unpacked", and select
-PROJECT_DIR/frontend.
+frontend/public.
 
 ## How To Run
 
@@ -33,7 +33,7 @@ PROJECT_DIR/frontend.
 
 ### Frontend
 
-    npm run start
+    npm run watch
 
 ## Contribute
 
