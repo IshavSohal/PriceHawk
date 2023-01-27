@@ -9,6 +9,7 @@ Amazon.
 
 - Python
 - Node.js
+- Docker
 - Chrome
 
 ## Installation
