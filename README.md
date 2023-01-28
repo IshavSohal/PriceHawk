@@ -9,13 +9,14 @@ Amazon.
 
 - Python
 - Node.js
+- Docker
 - Chrome
 
 ## Installation
 
 ### Backend
 
-    pip install django
+    pip install -r requirements.txt
 
 ### Frontend
 
@@ -27,6 +28,12 @@ frontend/public.
 ## How To Run
 
 ### Backend
+
+#### PostgreSQL Database
+
+    docker-compose up -d
+
+#### API
 
     python manage.py migrate
     python manage.py runserver
