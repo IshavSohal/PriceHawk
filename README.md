@@ -29,7 +29,7 @@ frontend/public.
 
 ### Backend
 
-#### PostgreSQL database
+#### PostgreSQL Database
 
     docker-compose up -d
 
