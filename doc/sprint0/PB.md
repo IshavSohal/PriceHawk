@@ -194,3 +194,10 @@ As any type of persona, I want to have a photo of my item beside it on my tracki
 * When adding an item for the first time (user story 8), I also have an additional (and optional) field named "select image" that allows the user to select the DOM element that contains the image.
 * This feature should also be available in the tracking page to add a photo to an already existing item that doesn't already have one (if the user didn't add it upon item creation)
 * Instead of selecting a DOM, the user should also have the option to select their own image (for both points above)
+
+### User story 22: Refresh Button (PRO)
+As a pro user, I want to be able to refresh my tracked item list any time I want with the latest prices for all of my tracked items so that my tracked item list is update to date.
+
+**Acceptance Crtieria**
+* Have a button near the top of the tracked item page that will get the latest prices for the tracked items for the current user 
+
