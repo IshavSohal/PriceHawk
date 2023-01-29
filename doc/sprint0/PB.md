@@ -201,3 +201,10 @@ As a pro user, I want to be able to refresh my tracked item list any time I want
 **Acceptance Crtieria**
 * Have a button near the top of the tracked item page that will get the latest prices for the tracked items for the current user 
 
+### User story 23: Tending Items (PRO)
+As a pro user, I want to be able to view the top most trending items.
+
+**Acceptance Crtieria**
+* Have a dedicated page for trending items.
+* Trending item is an item that is being tracked my a lot of users.
+* Display the Top K most tracked items 
