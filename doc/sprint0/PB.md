@@ -201,10 +201,39 @@ As a pro user, I want to be able to refresh my tracked item list any time I want
 **Acceptance Crtieria**
 * Have a button near the top of the tracked item page that will get the latest prices for the tracked items for the current user 
 
-### User story 23: Tending Items (PRO)
+### User story 23: Trending Items (PRO)
 As a pro user, I want to be able to view the top most trending items.
 
 **Acceptance Crtieria**
 * Have a dedicated page for trending items.
 * Trending item is an item that is being tracked my a lot of users.
 * Display the Top K most tracked items 
+
+
+### Prioritization  
+User stories at the top of the table have higher priority than the ones at the bottom
+
+|User Story|Priority|
+|---|---|
+|(1) Extension Tool Panel and Tracking Info Page|High|
+|(2) Create/Add an Item to Track|High|
+|(8) Extract Name and Price	|High|
+|(12) Price Tracking|High|
+|(4) Account Registration|High|
+|(5) Sign In/Out|High|
+|(14) Notifications|High|
+|(13) Price Tracking Failure|High|
+|(16) Price History of Items|Medium|
+|(20) Data Filtering and Sorting|Medium|
+|(18) Deleting an Item/Source|Medium|
+|(10/11) Item Organization|Medium|
+|(15) Account Settings|Medium|
+|(19) Recommended Sellers|Medium|
+|(6) Forgot Password|Medium|
+|(7) SSO Login|Medium|
+|(9) DOM Element Validation|Medium|
+|(3) Guest User|Low|
+|(17) Guest Data Migration|Low|
+|(22) Refresh Button|Low|
+|(23) Trending Items|Low|
+|(21) Optional Item Photo|Low|
