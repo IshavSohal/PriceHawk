@@ -84,15 +84,21 @@ hundreds of millions of potential users as online shopping becomes more and more
 popular in the modern world. Everyday more users are shopping online and more
 businesses are opening online web stores or their entire business model revolves
 around an online store. Just in the US alone it is estimated there were around
-268 million online shoppers in 2022, with that number projected to increase
-in 2023. To target these average online shoppers to help them in their online
+[268 million online shoppers in 2022](https://www.statista.com/statistics/273957/number-of-digital-buyers-in-the-united-states/), with that number projected to increase
+in 2023. 
+
+![Number of digital buyers in the United States from 2017 to 2025](./pictures/online_buyer_stats.png)
+
+To target these average online shoppers to help them in their online
 spending, the growth potential for the product certainly exists. As a business
-of the product the goal is to get a large number of users to incorporate the use
-of pricehawk into their daily online shopping routines. Then there are a few
-avenues which we could take to become profitable, through selling a premium
-subscription based service with additional features and bonuses for the user.
-Also parenting with affiliated e-commerce sites, so when customers use pricehawk
-to buy items from such sites, we take a small commission of the purchase.
+of the product, the goal is to get a large number of users to incorporate the use
+of pricehawk into their daily online shopping routines. Then there are a few avenues which we could take to become profitable, through selling a premium subscription based service with additional features and bonuses for the user. Also parenting with affiliated e-commerce sites, so when customers use pricehawk to buy items from such sites, we take a small commission of the purchase. To gain a healthy userbase that has the potential to grow, we could for instance go to as many online vendors as possible and offer them a cut of our users' subscription fees from all the users that tracked at least one item on their website. Since this advertising strategy assumes an existing chunk of subscribers, we would pay a one time advertising fee, on top of the previous offer, to allow these vendors to showcase our extension in order to get the ball rolling. Initially, our extension would be published on the chrome web store and would be marketed heavily towards the general consumer that wants to save money in their daily online shopping routines. Other forms of advertising could include Google ads and paid sponsorships to Youtubers.
+
+[Keepa](https://keepa.com/#!), a price tracker only used for Amazon, currently has users monitoring around 1 billion products in the U.S alone. 
+
+![keepa product monitoring stats](./pictures/keepa.png)
+
+Keepa charges 19 € / month. They have 3m+ downloads on the chrome store. Their number of premium users are unknown. If we pessimistically assume only 500k of those downloads are active users (even though it's probably higher since they have 3.3 billion active products being monitored), and only 5% of those users are subscribers = 500k * 0.05 * 19 = 475k € / month! And that is for Amazon alone. The potential revenue for tracking prices from multiple online vendors would be enormous. Realistically, since Keepa already dominates Amazon, it would be hard to take away the market share from them. However, it wouldn't be impossible to take away even a small fraction from them (which would still be significant in terms of user activity) by offering lower monthly fees for premium members. Nonetheless, we wouldn't need to take Keepa's Amazon market share since there are an endless amount of online venders that our extension could be used on.
 
 ## Principles
 
