@@ -1,90 +1,121 @@
-## WoofTrails, *a quicker and more secure dog walking service*
+## Problem Statement and Solution
 
-#### Problem Statement and Solution
-Most people live busy lives so they don't have enough time to walk their dogs. They need a dog walking service that connects them to trustworthy dog walkers. But most importantly, they want it done fast without the hassle of looking for walkers and old fashioned scheduling that takes up time and effort from people's already hectic lives. Most dog walking apps, (like the popular [Rover](https://www.rover.com/ca/)), use a map with plotted dog walker profiles on it that users must manually sift through (after inputting their location) until they find a walker that fits their schedule and their rating standards (for walkers). On top of that, if schedules don't align, the client has to contact the walker to work out a time and place. WoofTrails offers a more responsive connecting proccess. All a client has to do is press a button that (in real time) connects them to a dog walker (that is also searching for a client in real time). Ideally the pickup location is at the client's home, so the walker must be committed to a drive if necessary. Furthermore, people love their dogs and would hate for something to happen to them, that's why a lot of people hesitate and are paranoid when giving away their pet to a stranger. No matter how good someone's ratings are, anything can happen. WoofTrails features added security for your dog with a live tracking map feature and the ability to set custom walking paths in your neighbourhood (both of which are optional). 
+Many people in today's society have faced the issue of purchasing an item from a
+certain online retailer, just to realize there exists a better deal at a
+different retailer, one that they were not even aware of. This may seem
+insignificant for one individual purchase, but considering the long term effect
+of making numerous online purchases, you would realize this results in a
+significant and unnecessary waste of money. In addition, trying to find the best
+deal on an item can become quite time consuming and inconvenient.
 
-#### Key Users
-<ins>Dog walkers</ins>: background checked people who meet the standards to walk a dog
+A solution to these problems would be a price tracking chrome extension, called
+PriceHawk. This extension would allow for the user to create a collection of
+online listings, from a variety of retailers, for each individual product they
+are interested in buying.
 
-<ins>Dog owners</ins>: people who wan't their dog(s) walked  
+Even if a retailer does not have a product of interest, the user can still add
+it to their collection of online listings. From there, when the item becomes
+listed, the user will be notified of this. In addition, when the price of an
+item changes for a particular retailer (ex. due to a sale, limited time
+event/deal, etc.), the user will be notified of this, so they can take advantage
+of the lower priced options.
 
-#### Scenarios
-- As a client, I search up a walker on the app. If I find one in real time, great. But before I actually connect to the walker, the walker's profile pops up on my screen with their profile summary (totals ratings, rating average, most recent ratings) and I have to hit accept if I'm satisfied. If not, I can decline and matchmaking will look for another walker near me.
-- As a client, If I don't find something with live matchmaking, I will have to use the secondary booking system where I manually search and contact a walker to set a time and place. 
-- As a client, whether the walk was scheduled with live matching or regular scheduling, I can enable live tracking (which my walker also has to enable on their device) to see my dog live on a map. This is optional
-- As a client, before the walk, I can set a custom walking path that my walker should take. This is also optional
-- As a client who's using the security features, If I notice anything suspicious (like the dot stopped moving on the map) I can directly call the walker through the app, and if they don't respond I can alert authorities with the last known location I saw on the app. I will recieve a push notification if the walkers connection is lost. The dog walkers internet could also just be down. 
-- As a dog walker, I can search up owners looking for their dogs to be walked. If live matching is found..., otherwise,... (similar scenarios as the client)
-- As both a dog walker and client, I can rate my walker / client afterwards
+In addition, the extension will notify the user when an item of interest is low
+in stock for a particular retailer, so the user does not miss out.
 
-Note: walks times are categorized and billed differently (e.g. $20 for half an hour $10 for 15mins etc...), so before a walker / client hits the search button, they can select a category. 
+PriceHawk would allow for the user to access their own portfolio in a separate
+tab, where they can have access to a convenient interface that allows them to
+browse through their collections of product listings. Each product would include
+a pricing history graph, which showcases the changes in the market prices set by
+the various retailers, shown over a selected period of time.
 
-#### Market Sizing Analysis and Business Potential
+Overall, PriceHawk would save consumers both time and money when making online
+purchases, and would add convenience to the busy lives of many.
 
-<ins>Main Goal</ins>: to get enough traffic so that clients and walkers can find eachother more often to the point where the real time matchmaking system takes over the old fashioned booking system. 
+## User Experience
 
-[Number of households in Canada](https://www.globaldata.com/data-insights/macroeconomic/number-of-households-in-canada-2096147/#:~:text=2022%20Source%3A%20GlobalData-,Number%20of%20Households%20in%20Canada,the%20indicator%20increased%20by%2016.1%25.) : around 15.3 million
+Our UX will roughly follow this
+[Figma sketch](https://www.figma.com/file/UkgZOcVDRwv47Z6Ad9kZib).
 
-[Percentage of households that own a dog in Canada](https://petkeen.com/pet-ownership-statistics-canada/) : around 35%
+## Key Users
 
-<ins>Ballpark estimated revenue if our app successfuly operates in Canada</ins>: Since there are roughly 5.4 million households in Canada with dogs (0.35*15.3million), the potential is huge. Users on rover usually pay around $15-$30 per walk and rover charges a 20% service fee per walk. Assuming we offer an initial fee of 1-5% to increase popularity and traffic, and assuming we’re at a point where we have enough activity that allows us to charge a 10% fee: we would make roughly 0.10 * $20 (assuming avg. of 20 per walk) = $2 per walk. Assuming enough Canadians use the app so that in a given year (given 5-6 months of chilly weather), we average 10,000 walks per day (assuming 1 walk per household, is only 0.002% (10k/5.4mill) of the total number of households with dogs in Canada), that’s 10k walks per day =  $10k * $20 * 0.10 = $20k a day * 365 days = $7.3 mill a year revenue. This is possible but unrealistic since it assumes an already functioning business with a lot of traffic. Rover (which operates in US & Canada, but primarily in the states) anticipated revenue in the range of [$171 - $173 million in the third quarter of 2022](https://investors.rover.com/news-releases/news-release-details/rover-reports-third-quarter-2022-financial-results)
+- A key user is someone who frequently shops online, and wants to save money
+  while doing so.
+- A key user is an online business owner who wants to be aware of the prices
+  their competitors have for products they also sell.
+- A key user is someone who is interested in market trends, and wants a
+  convenient way to keep track of them in order to conduct research/analysis..
 
-Since we wouldn’t be known at the start of launch, our goal would be to take over Rover’s (and others’) market share in Canada and gain popularity by marketing and promoting the fact that we will be a Canadian (Rover is based in Seattle) company with the lowest service fees (amongst other Canadian dog walking apps), with a way quicker and more convinnient way of connecting to walkers, and added security for your pet. 
+## Scenarios
 
-#### Principles
-TODO
+Jeremy is looking to buy a prebuilt gaming PC. He doesn’t have much money to
+spend and is looking to make sure he makes an economical purchase. He finds a
+few computers online and is looking to track their price to see if any dip in
+price. None of the popular price tracking websites support the smaller companies
+he’s looking to purchase from, so after much trial and error he finds our
+extension through the Chrome Web Store. He’s able to successfully track the
+products using our extension, and after a few weeks of scanning prices he
+notices one goes on sale and makes the purchase.
 
-#### Feasibility
-We believe this idea is feasible, and can be completed in the timeframe of this course
-Possible tech stack:
-Frontend: typescript, react
-Backend: python, django/flask/fastapi, postgresql/mongodb/dynamodb,
-Hosting if required: aws, azure, heroku
+Bob is working on a personal project that looks at the latest trends in
+clothing, in particular with regards to suits, and why they occur. He has found
+many brands of suits which vary widely in their cost. He is looking for the
+current price and any changes in prices that will occur along with the brands
+that are lowering their costs or are offering a sale. He wishes to see if there
+is a trend in the prices and to be able to find it if it exists. He finds our
+extension through a Reddit thread discussing how to track products across the
+web. He uses our extension to track the price of a list of suits. After a month
+of using the extension he exports the data and runs a statistical analysis on
+it.
 
+Karen is looking to sell some new winter tires. There are many stores that offer
+winter tires and she needs a competitive price to keep up with those stores. She
+needs to see what her competitors are offering at what price in order to do so.
+She also needs to take into account any sales that are ongoing or could start at
+any moment so that she can plan her pricing strategy accordingly. She finds our
+extension through Google and begins tracking her competitors tire pricing. When
+the extension notifies her of a price change, she decides if she should match
+the competitor's new price.
 
-## Cinerama, *the new domain for your favourite movies and tv shows*
+## Market Sizing Analysis and Business Potential
 
-#### Problem Statement and Solution
-The vast majority of individuals who enjoy watching media spend excessive amounts of time trying to decide what they want to watch, to the point where they do not have time to watch the media itself. They constantly sift thought the abundance of choices avaibable to them, varying in genre(action, adventure, horror, thriller, comedy, etc.) as well as the type of media (movie, tv-show, documentary, docu-series, etc.). A solution to this problem would be a Movie recommendation system. Although a variety of movie recommendation systems currently exist, they either are limited to one platform, or are not adequate to fulfill the needs of the target audience. Our goal is to create such a system that includes media for a wide range of streaming services/platforms, and proves users with convenient methods for filtering the media they see. We plan to integrate Plex / Jellyfin with our website to provide users with the ability to stream the media they choose as well. 
+With an online price tracker the market sizing capabilities are within the
+hundreds of millions of potential users as online shopping becomes more and more
+popular in the modern world. Everyday more users are shopping online and more
+businesses are opening online web stores or their entire business model revolves
+around an online store. Just in the US alone it is estimated there were around
+268 million online shoppers in 2022, with that number projected to increase
+in 2023. To target these average online shoppers to help them in their online
+spending, the growth potential for the product certainly exists. As a business
+of the product the goal is to get a large number of users to incorporate the use
+of pricehawk into their daily online shopping routines. Then there are a few
+avenues which we could take to become profitable, through selling a premium
+subscription based service with additional features and bonuses for the user.
+Also parenting with affiliated e-commerce sites, so when customers use pricehawk
+to buy items from such sites, we take a small commission of the purchase.
 
-#### Key Users
-People who enjoy watching movies/tv-shows/documentaries, but are indecisive and/or get overwhelmed by other recommendation systems. This applies to a wide variety of the demographic, as people of all age groups, gender, and social classes tend to experience this problem.
+## Principles
 
-#### Scenarios
-- A user is browsing Netflix/Amazon Prime/(any other streaming service) and cannnot make a descision on what they should watch. They are overwhelmed by the excessive amounts of choices that are in front of them. Instead of wasting more time experiencing decision paralysis, they enter out website, where they first must carefully decide what kind of media they want to watch and what genre they are in the mood for. From there, only the media content that pertains to their selections will appear in front of them, making it much less overwhelming to choose what they want to watch
-- A user sees a movie/tv-show on the website and is interested in watching it, but does not have time at the moment to watch it right now. The user can instead add the movie to their watch list
-- A user finishes watching a movie/tv-show that they found on their website, and wants to express their opinions on it. The user can do so by writing a review and rating the movie on the website
-- A user finishes watching a movie/tv-show, and is recommended related movies/tv-shows by the website
-#### Market Sizing Analysis and Business Potential
+First is efficiency in keeping track of everything. The prices should be
+displayed accurately and promptly.
 
-#### Principles
+Second, if there are errors that can’t be solved internally, they should be
+communicated to the user quickly along with steps to take regarding the error.
 
-#### Feasibility
-We believe this idea is feasible, and can be completed in the timeframe of this course
-We can use The Movie DB to build a collection of movies and tv shows, and scrap IMDB + Rotten Tomatoes / wherever else to get user ratings which we’ll use for recommendations.
-Jellyfin / Plex have a plugin system which we can leverage to show recommendations in the app.
+Third is the appearance. The overall appearance of the extension should look
+attractive.
 
-## Medical World, *easy access to medical knowledge*
+## Feasibility
 
-#### Problem Statement and Solution
-Many people have health related problems but the medical world is vast which leaves an ordinary person who does not know much lost as to where to start and give up trying to learn more. The internet provides too many resources for a regular person to pick leaving them to pick no sources or the ones that show up first in the search results. This can lead to inaccurate results if they need to know something that is considered obsure in the medical field. A solution would an app with all the information available at the tips of anyone's fingers. This app would be able to diagnose problems and provide the next steps a person would need to take. The app would also display the severity level of an illness and show the chances of an illness matching symptoms. This would help any decision paralysis that could occur. There could optionally provide medical news to help people know what is going in the medical workld. This could also help people in a medical profession with making their lives by helping with diagnosis and treatmnet. 
+For the most part, the requirements for this product are pretty standard. We’ll
+create a typical Chrome extension which interacts with our backend REST API. The
+ability to store and display price history is relatively simple, along with our
+other features.
 
-#### Key Users
-<ins>Ordinary People</ins>: The general population that doesn't have extensive knowledge about medical fields
-
-
-<ins>Medical Professionals</ins>: People in medical fields
-
-#### Scenarios
-- As a user, I am able to designate symptoms which can allow me to view the possible conditions the symptoms connect to with varying percentages.
-- As a user, I can know what steps I should take if I get or have a medical condition.
-- As a user, I can see the news articles about the topics in the medical world I want to see.
-
-#### Market Sizing Analysis and Business Potential
-TODO
-
-#### Principles
-TODO
-
-#### Feasibility
-Might be feasible by getting a list of diseases and symptoms from a public database and putting that into a new database and query the database for searching for medical conditions. There would need to be a certification for correct information and maybe other certifications which could lead to this not being feasible.
+The uniquely difficult aspect will be to allow the scraping of any arbitrary
+website for price data. We’ll do this by letting the user select a region of the
+page where the price is, and then we store the DOM structure of that region. We
+can then use that DOM structure to let the web scraper know where the price
+information should be. Ad Blockers have a similar feature which lets users
+select a region to be hidden.
+https://www.ghacks.net/2017/02/21/ublock-origin-how-to-remove-any-element-from-a-page-permanently/
