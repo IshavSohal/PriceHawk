@@ -1,4 +1,4 @@
-from items.serializers.items import ItemSerializer
+from items.serializers.Items import ItemSerializer
 from rest_framework.generics import CreateAPIView
 
 class CreateItemsView(CreateAPIView):
