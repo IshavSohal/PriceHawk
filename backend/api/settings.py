@@ -132,3 +132,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_USE_TLS = True
