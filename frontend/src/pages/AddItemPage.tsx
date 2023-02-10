@@ -59,7 +59,13 @@ export default function AddItemPage() {
     })
     .then(function (data) { // on success
       navigate("/");
-    }).catch((error) => alert("Error Adding Item: " + error.statusText)); // on error
+    }).catch((response) => { // on failure
+      response.json().then((json: any) => {
+        let v_url = json["url"] || " "
+        let v_price = json["price"] || ""
+        alert("Invalid Request: " + v_url + v_price);
+      })
+    }); 
 
   }
 

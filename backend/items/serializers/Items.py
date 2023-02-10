@@ -2,6 +2,7 @@ from rest_framework import serializers
 from items.models import Item
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.core.validators import URLValidator
 
 class ItemSerializer(serializers.ModelSerializer):
     """
@@ -27,6 +28,14 @@ class ItemSerializer(serializers.ModelSerializer):
             return value
         except:
             raise serializers.ValidationError("Invalid price")
+    
+    def validate_url(self, value):
+        val = URLValidator()
+        try:
+            val(value)
+            return value
+        except:
+            raise serializers.ValidationError("Invalid URL")
 
     def create(self, validated_data):
         """
