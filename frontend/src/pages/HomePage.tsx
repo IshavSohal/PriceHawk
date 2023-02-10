@@ -6,12 +6,24 @@ export default function Home() {
 
   return (
     <Stack
-        style={{width: "200px"}}
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
-        spacing={1}>
+        spacing={2}>
+      
       <Button
-          variant="text"
+          variant="contained"
+          onClick={() => navigate("/signin")}>
+        Sign In
+      </Button>
+      
+      <Button
+          variant="contained"
+          onClick={() => navigate("/register")}>
+        Register
+      </Button>
+
+      <Button
+          variant="contained"
           onClick={() => navigate("/add-item")}>
         Add-Item
       </Button>

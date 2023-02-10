@@ -84,7 +84,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "password",
         "HOST": "localhost",
-        "PORT": 5432, 
+        "PORT": 5432,
     }
 }
 
@@ -139,6 +139,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "chrome-extension://hpcmkjgekkhbmcpklikgljjgojkiamka"
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_USE_TLS = True
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^chrome-extension:.+$",
 ]
