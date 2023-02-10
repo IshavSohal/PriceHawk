@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,3 +140,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = "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"
 EMAIL_USE_TLS = True
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^chrome-extension:.+$",
+]
