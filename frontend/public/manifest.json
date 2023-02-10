@@ -4,9 +4,8 @@
   "version": "0.1.0",
   "author": "CSC301 Placeholder",
   "description": "Universal price tracker.",
-  "permissions": [],
-  "host_permissions": [
-    "http://localhost:8000/*"
+  "permissions": [
+    "storage"
   ],
   "action": {
     "default_title": "Popup",
