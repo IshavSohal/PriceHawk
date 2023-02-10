@@ -1,9 +1,14 @@
 import React from 'react';
+import RegisterPage from './pages/RegisterPage'
+import { Routes, Route } from 'react-router';
+import HomePage from './pages/HomePage';
 
-function App() {
+
+export default function App() {
   return (
-    <>Test</>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/register" element={<RegisterPage />} />
+    </Routes>
   )
 }
-
-export default App;

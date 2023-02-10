@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -80,7 +83,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "password",
         "HOST": "localhost",
-        "PORT": 5432, 
+        "PORT": 5432,
     }
 }
 
@@ -125,3 +128,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_USE_TLS = True
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^chrome-extension:.+$",
+]
