@@ -8,28 +8,23 @@ export default function SignInButton() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailVerify, setEmailVerify] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState("");
   const [alert, setAlert] = useState<null | string>(null);
 
-  async function handleRegister() {
-    if (email !== emailVerify || password !== passwordVerify) {
-      return;
-    }
-
-    const res = await fetch("http://localhost:8000/users/", {
+  async function handleLogin() {
+    const res = await fetch("http://localhost:8000/token-auth/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         username: email,
-        email: email,
         password: password
       })
     });
 
-    if (res.status === 201) {
+    if (res.status === 200) {
+      const data = await res.json();
+      await storeToken(data["token"]);
       navigate("/");
     } else {
       setAlert(await res.text())
@@ -55,17 +50,6 @@ export default function SignInButton() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
-        error={email !== emailVerify}
-        margin="dense"
-        id="email"
-        label="Re-Enter Email Address"
-        type="email"
-        fullWidth
-        variant="standard"
-        onChange={(e) => setEmailVerify(e.target.value)}
-      />
-
-      <TextField
         margin="dense"
         id="password"
         label="Enter Password"
@@ -74,19 +58,13 @@ export default function SignInButton() {
         variant="standard"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <TextField
-        error={password !== passwordVerify}
-        margin="dense"
-        id="password"
-        label="Re-enter Password"
-        type="password"
-        fullWidth
-        variant="standard"
-        onChange={(e) => setPasswordVerify(e.target.value)}
-      />
 
       <Button onClick={() => navigate("/")}>Cancel</Button>
-      <Button onClick={handleRegister}>Submit</Button>
+      <Button onClick={handleLogin}>Submit</Button>
     </Container>
   );
+}
+
+async function storeToken(token: string) {
+  await chrome.storage.local.set({ "token": token });
 }

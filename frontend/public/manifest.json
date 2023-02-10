@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "author": "CSC301 Placeholder",
   "description": "Universal price tracker.",
-  "permissions": [],
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_title": "Popup",
     "default_popup": "popup.html"

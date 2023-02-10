@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
@@ -25,16 +26,20 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             return Response('Invalid key.', status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False, methods=['post'])
+    def logout(self, request):
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
+
+    @action(detail=False)
+    def current(self, request):
+        if not request.user:
+            return Response('Invalid request.', status=status.HTTP_400_BAD_REQUEST)
+
+        user = UserSerializer(request.user, context={'request': request}).data
+        return Response(user, status=status.HTTP_200_OK)
+
     def get_permissions(self):
         if self.action == 'create':
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
