@@ -8,20 +8,25 @@ class ItemSerializer(serializers.ModelSerializer):
     Serializer for Item, renders Item class to JSON
     to help with requests.
     """
+    guestid = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = Item
-        fields = ['id', 'name', 'price', 'url', 'created']
-        extra_kwargs = {'created': {'read_only': True}}
+        fields = ['id', 'name', 'price', 'url', 'created', 'guestid']
+        extra_kwargs = {'created': {'read_only': True}, 'guestid': {'write_only': True}}
 
     def validate_price(self, value):
         """
         Return price iff valid otherwise
         raise validation error.
         """
-        if value < 0:
+        try:
+            value = float(value)
+            if value < 0:
+                raise serializers.ValidationError("Invalid price")
+            return value
+        except:
             raise serializers.ValidationError("Invalid price")
-        return value
 
     def create(self, validated_data):
         """
@@ -45,9 +50,12 @@ class ItemSerializer(serializers.ModelSerializer):
                 url = url
             )
         
-        guest = request.COOKIES.get('fingerprint')
+        
+        guest = validated_data.get('guestid')
+        if not guest:
+            raise PermissionDenied("Guest ID must be provided if not signed in", 403)
         if Item.objects.filter(guest_session=guest, name=name, url=url).exists():
-                raise PermissionDenied("Already tracking this item!", 403)
+            raise PermissionDenied("Already tracking this item!", 403)
         return Item.objects.create(
                 guest_session = guest,
                 name = name,
