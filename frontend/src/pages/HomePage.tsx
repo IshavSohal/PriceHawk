@@ -6,7 +6,7 @@ type CurrentUserResponse = {
   email: string;
 }
 
-export default function() {
+export default function Home() {
   const navigate = useNavigate();
   const [user, setUser] = useState<CurrentUserResponse | null>(null);
 
@@ -39,11 +39,17 @@ export default function() {
     return (
       <>
         User: {user.email}
-
+        
         <Stack
             direction="column"
             divider={<Divider orientation="horizontal" flexItem />}
             spacing={1}>
+          <Button
+              variant="contained"
+              onClick={() => navigate("/add-item")}>
+            Add-Item
+          </Button>
+          
           <Button
               variant="contained"
               onClick={() => handleLogout()}>
@@ -58,16 +64,24 @@ export default function() {
     <Stack
         direction="column"
         divider={<Divider orientation="horizontal" flexItem />}
-        spacing={1}>
+        spacing={2}>
+      
       <Button
           variant="contained"
           onClick={() => navigate("/login")}>
         Login
       </Button>
+      
       <Button
-          variant="text"
+          variant="contained"
           onClick={() => navigate("/register")}>
         Register
+      </Button>
+
+      <Button
+          variant="contained"
+          onClick={() => navigate("/add-item")}>
+        Add-Item
       </Button>
     </Stack>
   );
