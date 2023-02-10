@@ -7,7 +7,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'password', 'email', 'groups']
 
     def create(self, validated_data):
         RegistrationService.send_email(validated_data.get('email'))
