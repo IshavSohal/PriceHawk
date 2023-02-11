@@ -40,6 +40,6 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(user, status=status.HTTP_200_OK)
 
     def get_permissions(self):
-        if self.action == 'create':
+        if self.action in ('create', 'validate'):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]

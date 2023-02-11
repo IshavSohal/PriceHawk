@@ -12,7 +12,10 @@ export default function Home() {
 
   async function handleLogout() {
     await fetch("http://localhost:8000/users/logout/", {
-      method: "POST"
+      method: "POST",
+      headers: {
+        "Authorization": `Token ${await getToken()}`
+      }
     });
     await chrome.storage.local.remove("token");
     setUser(null);
