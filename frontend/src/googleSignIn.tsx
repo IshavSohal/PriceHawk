@@ -29,7 +29,7 @@ function googleSignIn(setUser:any) {
                 fetch('http://127.0.0.1:8000/users/login/', get_user)
                     .then((response2) => response2.json())
                     .then(function (data2) {
-                        if(data2.username == undefined){
+                        if(data2.username === undefined){
                             setUser(data2['first_name'] + ' ' + data2['last_name'])
                         }
                         else{
