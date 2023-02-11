@@ -1,4 +1,4 @@
-# PriceHark
+# PriceHawk
 ### Standup details
 - <ins>Time</ins>: ~9 pm EST
 - <ins>Date</ins>: February 3rd, 2023
