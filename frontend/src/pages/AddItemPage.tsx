@@ -3,6 +3,7 @@ import { ClientJS } from 'clientjs';
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from 'react-router';
 import { Stack } from '@mui/system';
+import { getToken } from '../utilities/session';
 
 interface itemForm {
   [index: string]: string | number,
@@ -37,12 +38,12 @@ export default function AddItemPage() {
   /**
    * Send POST request with name, price, url
    */
-  function sendRequest() {
-    
-    fetch( `${API}/items/create/`, {
+  async function sendRequest() {
+
+    const fetchOptions: RequestInit = {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: values.name,
@@ -50,7 +51,18 @@ export default function AddItemPage() {
         url: values.url,
         guestid: fingerprint
       })
-    })
+    };
+
+    const authToken = await getToken();
+
+    if (authToken) {
+      fetchOptions.headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${authToken}`
+      };
+    }
+    
+    fetch( `${API}/items/create/`, fetchOptions)
     .then((response) => { 
       if (response.ok) {
         return response.json()

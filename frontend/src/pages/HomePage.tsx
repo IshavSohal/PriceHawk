@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Divider, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
+import { getToken } from '../utilities/session';
 
 type CurrentUserResponse = {
   email: string;
@@ -88,9 +89,4 @@ export default function Home() {
       </Button>
     </Stack>
   );
-}
-
-async function getToken() {
-  const data = await chrome.storage.local.get(["token"]);
-  return data.token;
 }
