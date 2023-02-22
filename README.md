@@ -29,14 +29,7 @@ frontend/public.
 
 ### Backend
 
-#### PostgreSQL Database
-
-    docker-compose up -d
-
-#### API
-
-    python manage.py migrate
-    python manage.py runserver
+    docker-compose up --build -d
 
 ### Frontend
 
