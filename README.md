@@ -31,6 +31,13 @@ frontend/public.
 
     docker-compose up --build -d
 
+#### To View logs
+
+1. Get container id
+    `docker container ls`
+2. View logs
+    `docker container logs --follow id`
+
 ### Frontend
 
     npm run watch
