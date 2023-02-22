@@ -29,14 +29,14 @@ frontend/public.
 
 ### Backend
 
-#### PostgreSQL Database
+    docker-compose up --build -d
 
-    docker-compose up -d
+#### To View logs
 
-#### API
-
-    python manage.py migrate
-    python manage.py runserver
+1. Get container id
+    `docker container ls`
+2. View logs
+    `docker container logs --follow id`
 
 ### Frontend
 
