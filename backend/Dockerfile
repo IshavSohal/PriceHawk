@@ -7,5 +7,5 @@ RUN pip3 install -r requirements.txt
 # Needs to wait a second for postgres to initialize.
 CMD sleep 1 && \
   python3 manage.py migrate && \
-  DJANGO_SUPERUSER_PASSWORD=admin python3 manage.py createsuperuser --noinput --username admin --email admin@test.localhost && \
+  DJANGO_SUPERUSER_PASSWORD=admin python3 manage.py createsuperuser --noinput --username admin --email admin@test.localhost || true && \
   python3 manage.py runserver 0.0.0.0:8000
