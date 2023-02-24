@@ -15,14 +15,14 @@ Amazon.
 
 ### Backend
 
-    docker-compose up -d
+    docker-compose up
 
 The Django admin panel can be accessed at http://localhost:8000/admin/. A
 default superuser will be created with credentials admin:admin.
 
 Logs can be viewed with
 
-    docker-compose logs app
+    docker-compose logs -f app
 
 To create a migration, run
 
@@ -31,7 +31,7 @@ To create a migration, run
 If Dockerfile or requirements.txt are modified, then the image must be rebuilt
 with
 
-    docker-compose up -d --build
+    docker-compose up --build
 
 ### Frontend
 
