@@ -1,24 +1,20 @@
 version: "3.9"
+name: "pricehawk-backend"
 
 services:
   app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    build: "."
     depends_on:
-      - db
+      - "db"
     ports:
-      - '8000:8000'
-    command: bash -c "
-          python manage.py migrate 
-          && python manage.py runserver 0.0.0.0:8000"
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - "./:/app"
+
   db:
-    image: postgres:13
+    image: "postgres:15-alpine"
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_PASSWORD=password
-    ports:
-      - 5432:5432
+      - "POSTGRES_PASSWORD=password"
     volumes:
       - "postgres_data:/var/lib/postgresql/data/"
 
