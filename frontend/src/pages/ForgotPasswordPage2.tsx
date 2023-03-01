@@ -39,6 +39,17 @@ export default function ForgotPassword2(){
                 {alert}
             </Alert>
             }
+
+            <TextField
+              margin="dense"
+              id="password"
+              label="Enter Key (check email)"
+              type="key"
+              fullWidth
+              variant="standard"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
     
             <TextField
               margin="dense"
