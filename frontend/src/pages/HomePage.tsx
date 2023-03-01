@@ -53,7 +53,11 @@ export default function Home() {
               onClick={() => navigate("/add-item")}>
             Add-Item
           </Button>
-          
+          <Button
+              variant="contained"
+              onClick={() => chrome.tabs.create({url: 'tracking-page.html'})}>
+            Tracking Page
+          </Button>
           <Button
               variant="contained"
               onClick={() => handleLogout()}>
