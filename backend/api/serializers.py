@@ -24,6 +24,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         return value
 
+    def change_password_1(self, validated_data):
+        
+
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
