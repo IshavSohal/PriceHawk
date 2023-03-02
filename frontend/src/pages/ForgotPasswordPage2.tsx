@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 
 export default function ForgotPassword2(){
     const navigate = useNavigate();
+    const [key, setKey] = useState("");
     const [password, setPassword] = useState("");
     const [passwordVerify, setPasswordVerify] = useState("");
     const [alert, setAlert] = useState<null | string>(null);
@@ -15,13 +16,14 @@ export default function ForgotPassword2(){
             return;
         }
 
-        const res = await fetch("http://localhost:8000/forgot-pw2/", {
+        const res = await fetch("http://localhost:8000/users/change-password/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              password: password
+              password: password,
+              key: key
             })
           });
       
@@ -42,12 +44,12 @@ export default function ForgotPassword2(){
 
             <TextField
               margin="dense"
-              id="password"
+              id="key"
               label="Enter Key (check email)"
               type="key"
               fullWidth
               variant="standard"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setKey(e.target.value)}
             />
 
     
