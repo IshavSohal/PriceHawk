@@ -1,12 +1,17 @@
-import { useState } from "react";
-import googleSignIn from "./googleSignIn";
+import React from 'react';
+import { Routes, Route } from 'react-router';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import AddItemPage from './pages/AddItemPage';
+import RegisterPage from './pages/RegisterPage'
 
-function App() {
-    const [user, setUser] = useState('')
-    return (<>
-        {user ? <p>Hi! {user}</p> : <button id="google-login" onClick={() => googleSignIn(setUser)}>Sign In With Google</button>}
-    </>
-    )
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/add-item" element={<AddItemPage />} />
+    </Routes>
+  )
 }
-
-export default App;

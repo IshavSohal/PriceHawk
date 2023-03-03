@@ -7,40 +7,39 @@ Amazon.
 
 ## Requirements
 
-- Python
-- Node.js
-- Docker
 - Chrome
-
-## Installation
-
-### Backend
-
-    pip install -r requirements.txt
-
-### Frontend
-
-    npm install
-
-Within Chrome, goto chrome://extensions/, click "Load unpacked", and select
-frontend/public.
+- Docker
+- Node.js
 
 ## How To Run
 
 ### Backend
 
-#### PostgreSQL Database
+    docker-compose up
 
-    docker-compose up -d
+The Django admin panel can be accessed at http://localhost:8000/admin/. A
+default superuser will be created with credentials admin:admin.
 
-#### API
+Logs can be viewed with
 
-    python manage.py migrate
-    python manage.py runserver
+    docker-compose logs -f app
+
+To create a migration, run
+
+    docker-compose run --rm -v ./:/app app python3 manage.py makemigrations
+
+If Dockerfile or requirements.txt are modified, then the image must be rebuilt
+with
+
+    docker-compose up --build
 
 ### Frontend
 
+    npm install
     npm run watch
+
+Within Chrome, goto chrome://extensions/, click "Load unpacked", and select
+frontend/public.
 
 ## Contribute
 

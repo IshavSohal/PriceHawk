@@ -5,6 +5,7 @@
   "author": "CSC301 Placeholder",
   "description": "Universal price tracker.",
   "permissions": [
+    "storage",
     "identity"
   ],
   "action": {

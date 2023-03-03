@@ -1,7 +1,7 @@
 import { build } from "esbuild";
 import fs from "fs";
 
-fs.watch("src", () => {
+fs.watch("src", { recursive: true }, () => {
   build({
     entryPoints: ["./src/popup.tsx"],
     outdir: "./public",

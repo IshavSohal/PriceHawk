@@ -44,10 +44,17 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+=======
+    'rest_framework.authtoken',
+    'items',
+    'corsheaders',
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -84,8 +91,8 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "password",
-        "HOST": "localhost",
-        "PORT": 5432, 
+        "HOST": "db",
+        "PORT": 5432,
     }
 }
 
@@ -142,4 +149,23 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "chrome-extension://pkfadilekbpdielbhopclpblifnepipe"
+]
+=======
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+}
+
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = "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"
+EMAIL_USE_TLS = True
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^chrome-extension:.+$",
 ]
