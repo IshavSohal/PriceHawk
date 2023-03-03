@@ -1,8 +1,14 @@
-/* https://developer.chrome.com/docs/extensions/mv3/tut_oauth/#create_call was used to get this function done */
+/* 
+    https://developer.chrome.com/docs/extensions/mv3/tut_oauth/#create_call was used to get this function done 
+    https://stackoverflow.com/questions/38985220/google-chrome-extension-how-to-find-out-if-a-user-has-signed-in-to-the-chrome-b for error
+*/
 import { getToken } from './session';
 
 async function googleSignIn(setUser: any) {
     chrome.identity.getAuthToken({ interactive: true }, async function (token: any) {
+        if(!token){
+            alert("Error Occured Signing In")
+        }
         let init = {
             method: 'GET',
             async: true,
@@ -28,7 +34,7 @@ async function googleSignIn(setUser: any) {
         const res2 = await fetch('http://127.0.0.1:8000/token-auth/', get_user).then((resp) => resp.json())
 
         if (res2.token !== undefined) {
-            chrome.storage.local.set({ "token": res2.token })
+            await chrome.storage.local.set({ "token": res2.token })
         }
         else {
             get_user = {
@@ -53,7 +59,7 @@ async function googleSignIn(setUser: any) {
                     password: res1.names[0].givenName + res1.emailAddresses[0].value + res1.names[0].familyName
                 })
             }
-            await fetch('http://127.0.0.1:8000/token-auth/', get_user).then((resp) => resp.json()).then((data) => chrome.storage.local.set({ "token": data.token }))
+            await fetch('http://127.0.0.1:8000/token-auth/', get_user).then((resp) => resp.json()).then(async (data) => await chrome.storage.local.set({ "token": data.token }))
 
         }
 

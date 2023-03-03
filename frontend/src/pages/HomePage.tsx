@@ -20,6 +20,7 @@ export default function Home() {
             }
         });
         await chrome.storage.local.remove("token");
+        chrome.identity.clearAllCachedAuthTokens(() => console.log())
         setUser(null);
     }
 
