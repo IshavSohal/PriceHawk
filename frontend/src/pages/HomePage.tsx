@@ -95,7 +95,7 @@ export default function Home() {
             <Button
                 variant="outlined"
                 color="success"
-                endIcon={<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5q0FP74VV9wbfwP378_7kj7iDomHuKrxkXsxDdUT28V9dlVMNUe-EMzaLwaFhneeuZI&usqp=CAU" alt="google Icon" width="24" height="24" />}
+                startIcon={<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5q0FP74VV9wbfwP378_7kj7iDomHuKrxkXsxDdUT28V9dlVMNUe-EMzaLwaFhneeuZI&usqp=CAU" alt="google Icon" width="24" height="24" />}
                 onClick={() => googleSignIn(setUser)}>
                 Sign In with Google
             </Button>
