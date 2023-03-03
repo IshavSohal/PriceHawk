@@ -55,7 +55,7 @@ export default function Home() {
           </Button>
           <Button
               variant="contained"
-              onClick={() => chrome.tabs.create({url: 'tracking-page.html'})}>
+              onClick={() => navigate("/tracking-page")}>
             Tracking Page
           </Button>
           <Button
