@@ -18,6 +18,9 @@ from rest_framework import routers
 from django.contrib import admin
 from django.urls import include, path, re_path
 from rest_framework.authtoken.views import obtain_auth_token
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
@@ -43,7 +46,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', include('items.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('token-auth/', obtain_auth_token, name='api_token_auth')
+    path('token-auth/', obtain_auth_token, name='api_token_auth'),
+    #using temporarily to test GetItemsView since tokens from /token-auth/ don't work
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]
 
 # swagger

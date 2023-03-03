@@ -53,7 +53,11 @@ export default function Home() {
               onClick={() => navigate("/add-item")}>
             Add-Item
           </Button>
-          
+          <Button
+              variant="contained"
+              onClick={() => navigate("/tracking-page")}>
+            Tracking Page
+          </Button>
           <Button
               variant="contained"
               onClick={() => handleLogout()}>
