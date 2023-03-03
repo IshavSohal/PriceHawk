@@ -4,14 +4,21 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import AddItemPage from './pages/AddItemPage';
 import RegisterPage from './pages/RegisterPage'
+import TrackingPage from './pages/TrackingPage'
+import { useNavigate } from "react-router";
 
 export default function App() {
+  const navigate = useNavigate()
+
   return (
+
+   
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/add-item" element={<AddItemPage />} />
+      <Route path="/tracking-page" element={<TrackingPage />} />
     </Routes>
   )
 }
