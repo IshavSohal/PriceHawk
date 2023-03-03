@@ -1,5 +1,5 @@
-"""api URL Configuration
 
+"""api URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -47,6 +47,7 @@ urlpatterns = [
     path('items/', include('items.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('googleRegister/', views.CreateGoogleUser.as_view(),name='google-register'),
     #using temporarily to test GetItemsView since tokens from /token-auth/ don't work
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 ]

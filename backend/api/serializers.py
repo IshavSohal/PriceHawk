@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .services.registration_service import RegistrationService
 
@@ -24,6 +25,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         return value
 
+class GoogleUserSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'password', 'email', 'groups']
+    
+    def validate_password(self, value):
+        return make_password(value)
+        
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
