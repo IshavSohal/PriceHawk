@@ -8,7 +8,16 @@
   "permissions": [
     "storage",
     "identity"
+    "contextMenus",
+    "tabs"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }],
   "action": {
     "default_title": "Popup",
     "default_popup": "popup.html"

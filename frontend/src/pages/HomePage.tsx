@@ -77,6 +77,40 @@ export default function Home() {
                 onClick={() => navigate("/login")}>
                 Login
             </Button>
+            spacing={1}>
+          <Button
+              variant="contained"
+              onClick={() => navigate("/add-item")}>
+            Add-Item
+          </Button>
+          <Button
+              variant="contained"
+              onClick={() => navigate("/tracking-page")}>
+            Tracking Page
+          </Button>
+          <Button
+              variant="contained"
+              onClick={() => handleLogout()}>
+            Logout
+          </Button>
+        </Stack>
+      </>
+    );
+  }
+
+  return (
+    <Stack direction="column" spacing={2}>
+      <Button
+          variant="contained"
+          onClick={() => navigate("/login")}>
+        Login
+      </Button>
+      
+      <Button
+          variant="contained"
+          onClick={() => navigate("/register")}>
+        Register
+      </Button>
 
             <Button
                 variant="contained"
