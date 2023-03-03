@@ -65,11 +65,7 @@ export default function Home() {
   }
 
   return (
-    <Stack
-        direction="column"
-        divider={<Divider orientation="horizontal" flexItem />}
-        spacing={2}>
-      
+    <Stack direction="column" spacing={2}>
       <Button
           variant="contained"
           onClick={() => navigate("/login")}>
