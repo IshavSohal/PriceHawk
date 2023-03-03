@@ -4,9 +4,8 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
-from api.serializers import UserSerializer, GroupSerializer
+from api.serializers import UserSerializer, GoogleUserSerializer
 from .services.registration_service import RegistrationService
-from serializers import GoogleUserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
