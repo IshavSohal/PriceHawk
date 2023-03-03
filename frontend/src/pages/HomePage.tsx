@@ -94,7 +94,7 @@ export default function Home() {
                 variant="contained"
                 color="success"
                 onClick={() => googleSignIn(setUser)}>
-                Continue with Google
+                Sign In with Google
             </Button>
         </Stack>
     );
