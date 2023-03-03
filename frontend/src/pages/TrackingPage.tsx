@@ -45,11 +45,13 @@ const TrackingPage = () => {
           "Authorization": `Token ${await getToken()}`
         }
       });
+
     }
 
     let index = dataArray.findIndex((obj: any) => obj.id === id)
     dataArray.splice(index, 1);
     deleteItem();
+    setOpen(false);
   }
 
   const handleClickOpen = () => {
