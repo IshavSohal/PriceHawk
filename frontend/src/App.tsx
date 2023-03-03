@@ -8,7 +8,6 @@ import TrackingPage from './pages/TrackingPage'
 import { useNavigate } from "react-router";
 
 export default function App() {
-
   return (
 
    
