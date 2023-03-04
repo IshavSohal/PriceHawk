@@ -21,15 +21,15 @@ No spikes encountered
 
 **Participants**
 
-| Member      | Task |
+| Member      | Attended |
 | ----------- | -----------|
-|Taha|User story 8|
-|Ishav|User story 6|
-|Ethan|User story 6|
-|Mustafa|User story 1|
-|Justin|User story 8|
-|Ovidiu|User story 1|
-|Ryan|User Story 7|
+|Taha|yes|
+|Ishav|yes|
+|Ethan|yes|
+|Mustafa|yes|
+|Justin|yes|
+|Ovidiu|yes|
+|Ryan|yes|
 
 <br>
 
