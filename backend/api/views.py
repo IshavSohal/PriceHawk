@@ -3,7 +3,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from api.serializers import UserSerializer, GroupSerializer
+from rest_framework.generics import CreateAPIView
+from api.serializers import UserSerializer, GoogleUserSerializer
 from .services.registration_service import RegistrationService
 
 
@@ -43,3 +44,9 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action in ('create', 'validate'):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
+
+class CreateGoogleUser(CreateAPIView):
+    serializer_class = GoogleUserSerializer
+    
+    def get_permissions(self):
+        return [permissions.AllowAny()]

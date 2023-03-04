@@ -15,6 +15,10 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0.0)
     url = models.CharField(max_length=250)
+
+    name_html = models.TextField(null=True)
+    price_html = models.TextField(null=True)
+
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
