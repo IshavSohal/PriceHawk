@@ -41,6 +41,10 @@ with
 Within Chrome, goto chrome://extensions/, click "Load unpacked", and select
 frontend/public.
 
+## Endpoint Documentation
+While the server is running, go to http://localhost:8000/swagger/ or http://localhost:8000/redoc to see the currently supported endpoints
+
+
 ## Contribute
 
 If you want to contribute, start by creating a feature branch. Push as many
