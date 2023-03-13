@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group
+from users.models import PHUser
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .services.registration_service import RegistrationService
@@ -7,8 +8,8 @@ from .services.registration_service import RegistrationService
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
-        model = User
-        fields = ['url', 'username', 'password', 'email', 'groups']
+        model = PHUser
+        fields = ['url', 'username', 'password', 'email', 'groups', 'emailnotifications', 'pro', 'priceInterval']
 
     def create(self, validated_data):
         RegistrationService.send_email(validated_data.get('email'))
@@ -28,8 +29,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class GoogleUserSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
-        model = User
-        fields = ['url', 'username', 'password', 'email', 'groups']
+        model = PHUser
+        fields = ['url', 'username', 'password', 'email', 'groups', 'emailnotifications', 'pro', 'priceInterval']
     
     def validate_password(self, value):
         return make_password(value)

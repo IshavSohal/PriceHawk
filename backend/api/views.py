@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
+from users.models import PHUser
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,14 +13,14 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = PHUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
     @action(detail=False, permission_classes=[permissions.AllowAny])
     def validate(self, request):
         email = request.query_params.get('email')
         key = request.query_params.get('key')
-        user = User.objects.filter(email=email)
+        user = PHUser.objects.filter(email=email)
 
         if RegistrationService.validate_key(email, key):
             user.update(is_active=True)
