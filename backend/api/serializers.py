@@ -9,7 +9,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = PHUser
-        fields = ['url', 'username', 'password', 'email', 'groups', 'emailnotifications', 'pro', 'priceInterval']
+        fields = ['url', 'username', 'password', 'email',
+                  'groups', 'emailnotifications', 'pro', 'priceInterval', 'google']
 
     def create(self, validated_data):
         RegistrationService.send_email(validated_data.get('email'))
@@ -26,15 +27,20 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         return value
 
+
 class GoogleUserSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     class Meta:
         model = PHUser
-        fields = ['url', 'username', 'password', 'email', 'groups', 'emailnotifications', 'pro', 'priceInterval']
-    
+        fields = ['url', 'username', 'password', 'email',
+                  'groups', 'emailnotifications', 'pro', 'priceInterval', 'google']
+
     def validate_password(self, value):
         return make_password(value)
-        
+
+    def create(self, validated_data):
+        return super().create({**validated_data, **{'google': True}})
+
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
