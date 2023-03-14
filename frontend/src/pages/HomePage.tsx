@@ -45,7 +45,6 @@ export default function Home() {
     return (
       <>
         User: {user.email}
-        
         <Stack
             direction="column"
             divider={<Divider orientation="horizontal" flexItem />}
