@@ -33,7 +33,7 @@ class Price(models.Model):
     """
     Object model for prices.
     """
-    item = models.ForeignKey(to=Item, related_name="Prices", on_delete=SET_NULL) 
+    item = models.ForeignKey(to=Item, related_name="Prices", null=True, on_delete=SET_NULL) 
     value = models.FloatField(default=0.0)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -43,7 +43,7 @@ class Price(models.Model):
         This is how it will be displayed
         in admin panel.
         """
-        return f'{self.item.name} costs {self.price} on {self.date}'
+        return f'{self.item.name} costs {self.value} on {self.date}'
 
 
 
