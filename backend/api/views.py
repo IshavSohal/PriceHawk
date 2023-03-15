@@ -41,9 +41,6 @@ class UserViewSet(viewsets.ModelViewSet):
         user = UserSerializer(request.user, context={'request': request}).data
         return Response(user, status=status.HTTP_200_OK)
 
-    def partial_update(self, request, *args, **kwargs):
-        return super().partial_update(request, *args, **kwargs)
-
     @action(detail=False, methods=['patch'])
     def change(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)
