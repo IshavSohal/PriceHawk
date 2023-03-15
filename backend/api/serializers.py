@@ -23,6 +23,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def validate_password(self, value):
         return make_password(value)
+        
 
 class GoogleUserSerializer(serializers.HyperlinkedModelSerializer):
 
