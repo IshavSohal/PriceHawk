@@ -43,7 +43,7 @@ class Price(models.Model):
         This is how it will be displayed
         in admin panel.
         """
-        return f'{self.item.name} costs {self.price} on {self.date}'
+        return f'{self.item.name} costs {self.value} on {self.date}'
 
 
 
