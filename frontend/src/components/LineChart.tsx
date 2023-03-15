@@ -1,5 +1,5 @@
 import { CanvasJSChart } from 'canvasjs-react-charts';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getToken } from '../utilities/session';
 
 interface Price {
@@ -24,7 +24,7 @@ const LineChart = ({ item_id }: { item_id: number}) => {
   
     const options = {
       animationEnabled: true,
-      theme: "light2", // "light1", "dark1", "dark2"
+      theme: "light2",
       height: 250,
       width: 400,
       title: {
@@ -42,9 +42,9 @@ const LineChart = ({ item_id }: { item_id: number}) => {
     useEffect(() => {
 
         async function getPrices(id: number) {
-          // `${API}/items/get-item-prices/${id}/`
+          // `https://mocki.io/v1/5f67f9ed-fd80-4e4d-8e93-690afcbedcc3`
           // `https://mocki.io/v1/f51ce6f8-10a5-4416-8956-188663a29932`
-            const response = await fetch(`https://mocki.io/v1/5f67f9ed-fd80-4e4d-8e93-690afcbedcc3`, {
+            const response = await fetch(`${API}/items/prices/${id}/`, {
                 headers: {
                     "Authorization": `Token ${await getToken()}`
                 }
@@ -63,7 +63,7 @@ const LineChart = ({ item_id }: { item_id: number}) => {
 
         getPrices(item_id);
 
-    }, []);
+    }, [item_id]);
   
     return (
       <div>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Stack } from '@mui/system';
+import { useState, useEffect } from 'react';
 import LineChart from '../../components/LineChart';
 import { useParams } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ export default function ItemPricesPage() {
     if (id) {
       setItemId(parseInt(id, 10));
     }
-  }, []);
+  }, [id]);
   
   return (
     <>
