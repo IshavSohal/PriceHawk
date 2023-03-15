@@ -3,7 +3,7 @@ from items.models import Price, Item
 
 class PriceSerializer(serializers.ModelSerializer):
     """
-    Serializer for Item, renders Item class to JSON
+    Serializer for Price, renders Price class to JSON
     to help with requests.
     """
     item = serializers.IntegerField(source='item.id')

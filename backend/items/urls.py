@@ -9,6 +9,6 @@ urlpatterns = [
     path('get-items/', GetItemsView.as_view(), name='get-items'),
     path('delete-item/<int:item_id>/', DeleteItemView.as_view(), name='delete-item'),
     path('update-item/<int:item_id>/', UpdateItemView.as_view(), name='update-item'),
-    path('get-item-prices/<int:item_id>/', ItemsPricesView.as_view(), name='get-items-prices')
+    path('prices/<int:item_id>/', ItemsPricesView.as_view(), name='get-items-prices')
 
 ]
