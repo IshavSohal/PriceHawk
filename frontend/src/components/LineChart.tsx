@@ -31,7 +31,11 @@ const LineChart = ({ item_id }: { item_id: number}) => {
         text: `${itemName}'s Price History`
       },
       axisX: {
+        title: "Date",
         minimum: Math.min(...dataPoints.map(dataPoint => dataPoint.x))
+      },
+      axisY: {
+        title: "Price",
       },
       data: [{
         type: "line",
