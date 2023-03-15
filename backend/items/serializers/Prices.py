@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from items.models import Price, Item
 
-class ItemSerializer(serializers.ModelSerializer):
+class PriceSerializer(serializers.ModelSerializer):
     """
-    Serializer for Item, renders Item class to JSON
+    Serializer for Price, renders Price class to JSON
     to help with requests.
     """
     item = serializers.IntegerField(source='item.id')
