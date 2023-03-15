@@ -5,9 +5,11 @@ import LoginPage from './pages/LoginPage';
 import AddItemPage from './pages/AddItemPage';
 import RegisterPage from './pages/RegisterPage'
 import TrackingPage from './pages/TrackingPage'
+import ItemsPricesPage from './pages/Items/[id]';
 import { useNavigate } from "react-router";
 
 export default function App() {
+
   return (
 
    
@@ -17,6 +19,7 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/add-item" element={<AddItemPage />} />
       <Route path="/tracking-page" element={<TrackingPage />} />
+      <Route path="/items/:id" element={<ItemsPricesPage />} />
     </Routes>
   )
 }
