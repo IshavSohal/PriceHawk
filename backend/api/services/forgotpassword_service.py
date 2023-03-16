@@ -9,7 +9,7 @@ class ForgotPasswordService:
 
         send_mail(
             'Price Hawk User Forgot Password',
-            f'If this was you, click http://localhost:8000/users/resetpassword/?email={recipient}&key={key}',
+            f'If this was you, your key is {key}',
             'pricehawk@potatodiet.ca',
             [recipient],
             fail_silently=False
