@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Divider, Stack } from "@mui/material";
 import  { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios';
+import { useNavigate } from "react-router";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,6 +22,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 const TrackingPage = () => {
   const [dataNew, setDataNew] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // axios.get("http://localhost:8000/items/get-items/").then((data) => setDataNew(data.data))
@@ -67,10 +69,9 @@ const TrackingPage = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="right">Item</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Price</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Price</TableCell>
+            <TableCell align="left">Price History</TableCell>
             {/* <TableCell align="right">Created</TableCell> */}
           </TableRow>
         </TableHead>
@@ -80,12 +81,14 @@ const TrackingPage = () => {
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell component="th" scope="row">{row.name}</TableCell>
+              <TableCell align="left">{row.price}</TableCell>
+              <TableCell align="left">
+              {<Button
+                    onClick={() => navigate(`/items/${row.id}`)}>
+                  page/items/{row.id}
+              </Button>}
               </TableCell>
-              <TableCell align="right">{row.id}</TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.price}</TableCell>
               {/* <TableCell align="right">{row.created}</TableCell> */}
 
               <Button onClick ={handleClickOpen}>Delete</Button>

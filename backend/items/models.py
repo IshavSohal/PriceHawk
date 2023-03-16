@@ -27,3 +27,22 @@ class Item(models.Model):
         in admin panel.
         """
         return f'{self.name}: {self.price}'
+
+class Price(models.Model):
+    """
+    Object model for prices.
+    """
+    item = models.ForeignKey(to=Item, related_name="Prices", null=True, on_delete=SET_NULL) 
+    value = models.FloatField(default=0.0)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """
+        String representation for price.
+        This is how it will be displayed
+        in admin panel.
+        """
+        return f'{self.item.name} costs {self.value} on {self.date}'
+
+
+
