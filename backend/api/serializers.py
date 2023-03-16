@@ -23,8 +23,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                 "A user with that email already exists.")
 
         return value
-
-    def change_password_1(self, validated_data):
         
 
 

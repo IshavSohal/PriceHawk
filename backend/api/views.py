@@ -44,7 +44,8 @@ class UserViewSet(viewsets.ModelViewSet):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
 
-    def reset_password(self, request):
+    @action(detail=False)
+    def resetpassword(self, request):
         email = request.query_params.get('email')
         key = request.query_params.get('key')
         user = User.objects.filter(email=email)
@@ -55,3 +56,14 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             return Response('Invalid key.', status=status.HTTP_400_BAD_REQUEST)
 
+    @action(detail=False)
+    def changepassword(self, request):
+        password = request.query_params.get('password')
+        key = request.query_params.get('key')
+        user = User.objects.filter(email=email)
+
+        if ForgotPasswordService.validate_key(email, key):
+            user.update(is_active=True)
+            return Response('', status=status.HTTP_200_OK)
+        else:
+            return Response('Invalid key.', status=status.HTTP_400_BAD_REQUEST)
