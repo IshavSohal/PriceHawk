@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from items.models import Item
+from items.models import Item, Price
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.validators import URLValidator
@@ -55,7 +55,7 @@ class ItemSerializer(serializers.ModelSerializer):
             if Item.objects.filter(user=user, name=name, url=url).exists():
                 raise PermissionDenied("Already tracking this item!", 403)
 
-            return Item.objects.create(
+            item = Item.objects.create(
                 user = user,
                 name = name,
                 price = price,
@@ -70,7 +70,7 @@ class ItemSerializer(serializers.ModelSerializer):
             raise PermissionDenied("Guest ID must be provided if not signed in", 403)
         if Item.objects.filter(guest_session=guest, name=name, url=url).exists():
             raise PermissionDenied("Already tracking this item!", 403)
-        return Item.objects.create(
+        item = Item.objects.create(
                 guest_session = guest,
                 name = name,
                 price = price,
@@ -78,3 +78,6 @@ class ItemSerializer(serializers.ModelSerializer):
                 name_html = n_html,
                 price_html = p_html
             )
+        
+        Price.objects.create(item=item, value=price)
+        return item
