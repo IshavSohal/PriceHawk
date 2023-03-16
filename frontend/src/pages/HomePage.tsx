@@ -90,11 +90,6 @@ export default function Home() {
         Add-Item
       </Button>
 
-      <Button
-          variant="contained"
-          onClick={() => navigate("/items/8")}>
-        Item Page
-      </Button>
       {
         // Icon on Button https://stackoverflow.com/questions/66095141/how-to-put-an-icon-on-in-the-corner-of-a-material-ui-button
       }
