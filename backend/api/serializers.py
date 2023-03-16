@@ -4,6 +4,10 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .services.registration_service import RegistrationService
 
+'''
+https://stackoverflow.com/questions/62498581/typeerror-when-merging-dictionaries-unsupported-operand-types-for-dict-a
+source combining dictionaries
+'''
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
