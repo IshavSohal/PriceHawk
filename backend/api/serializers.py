@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from users.models import PHUser
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
@@ -16,6 +16,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'username', 'password', 'email', 'groups', 'emailnotifications', 'pro', 'priceInterval', 'google']
 
     def create(self, validated_data):
+        RegistrationService.send_email(validated_data.get('email'))
         return super().create({**validated_data, **{'is_active': False}})
 
     def validate_email(self, value):
