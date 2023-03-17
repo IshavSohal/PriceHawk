@@ -10,21 +10,13 @@ async function getCurrentTab() {
 }
 
 async function beginTracking(state: State) {
-  console.log(
-    JSON.stringify({
-      name: state.name,
-      price: state.price_text,
-      price_html: state.price_attributes,
-      url: state.url,
-    })
-  );
   const authToken = await getToken();
   const res = await fetch("http://localhost:8000/items/create/", {
     method: "POST",
     body: JSON.stringify({
       name: state.name,
       price: state.price_text,
-      price_html: state.price_attributes?.join(";"),
+      price_html: state.price_attributes,
       url: state.url,
     }),
     headers: {

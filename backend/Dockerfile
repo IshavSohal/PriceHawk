@@ -3,6 +3,7 @@ FROM python:3.11-alpine
 WORKDIR /app
 ADD requirements.txt /app
 RUN pip3 install -r requirements.txt
+RUN apk update && apk add --no-cache chromium-chromedriver
 
 # Needs to wait a second for postgres to initialize.
 CMD sleep 1 && \
