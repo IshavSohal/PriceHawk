@@ -45,6 +45,7 @@ export default function Settings() {
         }
         if (othermail !== email) {
             sendBody.email = email
+            sendBody.username = email
             setOthermail(email)
         }
         if (password) {
