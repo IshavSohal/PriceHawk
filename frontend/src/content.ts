@@ -8,21 +8,22 @@ function findName(): string | undefined {
   return elements.pop()?.textContent?.trim() ?? undefined;
 }
 
-function findPrice(): { text: string; attributes: string[] } | undefined {
-  const elements = Array.from(document.querySelectorAll(":hover")).reverse();
+function findPrice(): { text: string; attributes: string } | undefined {
+  let current = window.getSelection()?.getRangeAt(0)
+    .startContainer.parentElement;
+  while (current) {
+    const rx = /\$(\d+(?:\.\d+)?)/;
+    const price = current.textContent?.match(rx)?.at(1);
+    if (price && current.className.length > 0) {
+      return {
+        text: price,
+        attributes: `${current.className},${current.id}`,
+      };
+    }
+    current = current.parentElement;
+  }
 
-  const rx = /\$(\d+(?:\.\d+)?)/;
-  const price = elements.at(0)?.textContent?.match(rx)?.at(1);
-  if (price === undefined) return undefined;
-
-  const attributes = elements
-    .map((element) => element.className + "," + element.id)
-    .filter((attr) => attr.length > 1);
-
-  return {
-    text: price,
-    attributes: attributes,
-  };
+  return undefined;
 }
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
