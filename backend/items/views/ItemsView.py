@@ -59,6 +59,7 @@ class RefreshItemView(GenericAPIView):
     queryset = Item.objects.all()
     permission_classes = [IsAuthenticated]
 
+
     def post(self, request, *args, **kwargs):
         item = self.get_object()
         price = extract_price(item.url, item.price_html)
