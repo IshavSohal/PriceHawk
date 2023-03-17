@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models import SET_NULL
+from users.models import PHUser
 
 # Create your models here.
 
@@ -12,8 +11,8 @@ class Item(models.Model):
     how an Item is stored in the data 
     store.
     """
-    user = models.ForeignKey(to=User, on_delete=SET_NULL,
-                             null=True, related_name='items')
+
+    user = models.ForeignKey(to=PHUser, on_delete=models.SET_NULL, null=True, related_name='items')
     guest_session = models.CharField(null=True, max_length=100)
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0.0)
@@ -37,8 +36,8 @@ class Price(models.Model):
     """
     Object model for prices.
     """
-    item = models.ForeignKey(
-        to=Item, related_name="Prices", null=True, on_delete=SET_NULL)
+
+    item = models.ForeignKey(to=Item, related_name="Prices", null=True, on_delete=models.SET_NULL)
     value = models.FloatField(default=0.0)
     date = models.DateTimeField(auto_now_add=True)
 

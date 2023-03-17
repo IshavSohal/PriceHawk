@@ -1,4 +1,4 @@
-cd backend
-docker-compose up -d
-cd ../frontend
-npm run watch
+cd frontend
+npm run watch &
+cd ../backend
+docker-compose up
