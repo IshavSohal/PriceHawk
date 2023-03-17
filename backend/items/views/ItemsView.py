@@ -57,7 +57,8 @@ class RefreshItemView(GenericAPIView):
     Handles refreshing an item's price.
     """
     queryset = Item.objects.all()
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
+
 
     def post(self, request, *args, **kwargs):
         item = self.get_object()
@@ -67,4 +68,4 @@ class RefreshItemView(GenericAPIView):
         item.price = price
         item.save()
         Price.objects.create(item=item, value=price)
-        return Response()
+        return Response({'price': price})
