@@ -21,9 +21,6 @@ def extract_price(url: str, attributes: str) -> float | None:
     if id:
         id = '#' + id.replace(' ', '#')
 
-    with open('wish.html', 'w') as f:
-        f.write(driver.page_source)
-
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     for element in soup.select(class_ + id):
         match = re.search(r'\$(\d+(?:\.\d+)?)', element.get_text())

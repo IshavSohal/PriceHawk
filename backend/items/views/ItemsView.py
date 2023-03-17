@@ -4,7 +4,7 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from items.models import Item
+from items.models import Item, Price
 from items.services.scraper import extract_price
 
 
@@ -66,4 +66,5 @@ class RefreshItemView(GenericAPIView):
             return Response("Error", status=400)
         item.price = price
         item.save()
+        Price.objects.create(item=item, value=price)
         return Response()
