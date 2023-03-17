@@ -16,7 +16,7 @@ export default function ForgotPassword2(){
             return;
         }
 
-        const res = await fetch("http://localhost:8000/users/change-password/", {
+        const res = await fetch("http://localhost:8000/users/changepassword/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
