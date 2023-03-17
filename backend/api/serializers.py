@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .services.registration_service import RegistrationService
-
+from .services.forgotpassword_service import ForgotPasswordService
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -22,8 +22,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             raise serializers.ValidationError(
                 "A user with that email already exists.")
 
-        return value
-        
+        return value    
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
