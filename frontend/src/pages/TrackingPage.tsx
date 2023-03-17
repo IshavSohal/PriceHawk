@@ -40,10 +40,10 @@ const TrackingPage = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Price</TableCell>
-            <TableCell align="left">Price History</TableCell>
-            {/* <TableCell align="right">Created</TableCell> */}
+            <TableCell>Name</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell>Refresh</TableCell>
+            <TableCell>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

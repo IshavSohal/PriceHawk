@@ -65,21 +65,22 @@ export default function TrackingPageRow(props: Props) {
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
     >
       <TableCell component="th" scope="row">
-        {props.name}
-      </TableCell>
-      <TableCell align="left">
-        {price} {refreshing && <CircularProgress />}
-      </TableCell>
-      <TableCell align="left">
-        {
-          <Button onClick={() => navigate(`/items/${props.id}`)}>
-            page/items/{props.id}
-          </Button>
-        }
+        <Button onClick={() => navigate(`/items/${props.id}`)}>
+          {props.name}
+        </Button>
       </TableCell>
 
-      <Button onClick={handleRefresh}>Refresh</Button>
-      <Button onClick={() => setOpen(true)}>Delete</Button>
+      <TableCell>
+        {price} {refreshing && <CircularProgress size="15px" />}
+      </TableCell>
+
+      <TableCell>
+        <Button onClick={handleRefresh}>Refresh</Button>
+      </TableCell>
+
+      <TableCell>
+        <Button onClick={() => setOpen(true)}>Delete</Button>
+      </TableCell>
 
       <Dialog
         open={open}
