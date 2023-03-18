@@ -2,7 +2,7 @@ export type State = {
   url?: string;
   name?: string;
   price_text?: string;
-  price_attributes?: string[];
+  price_attributes?: string;
 };
 
 export async function getState(url: string): Promise<State> {

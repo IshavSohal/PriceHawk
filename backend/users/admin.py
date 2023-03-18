@@ -1,4 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
+from users.models import PHUser
 
-admin.register(User)
+admin.site.register(PHUser)
