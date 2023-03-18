@@ -39,7 +39,6 @@ class DeleteItemView(DestroyAPIView):
     def get_object(self):
         return get_object_or_404(Item, pk=self.kwargs['item_id'])
 
-
 class UpdateItemView(UpdateAPIView):
     """
     Handles patch request
