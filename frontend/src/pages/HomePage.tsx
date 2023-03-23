@@ -3,6 +3,7 @@ import { Button, Divider, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { getToken } from '../utilities/session';
 import googleSignIn from '../utilities/googleSignIn';
+import { ClientJS } from 'clientjs';
 
 type CurrentUserResponse = {
     email: string;
@@ -11,6 +12,7 @@ type CurrentUserResponse = {
 export default function Home() {
     const navigate = useNavigate();
     const [user, setUser] = useState<CurrentUserResponse | null>(null);
+    const [fingerprint, setFingerprint] = useState("")
 
     async function handleLogout() {
         await fetch("http://localhost:8000/users/logout/", {
@@ -35,6 +37,8 @@ export default function Home() {
                 setUser(await response.json());
             } else {
                 setUser(null);
+                const client = new ClientJS();
+                setFingerprint(client.getFingerprint());
             }
         }
 
@@ -102,7 +106,7 @@ export default function Home() {
                 variant="outlined"
                 color="success"
                 startIcon={<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5q0FP74VV9wbfwP378_7kj7iDomHuKrxkXsxDdUT28V9dlVMNUe-EMzaLwaFhneeuZI&usqp=CAU" alt="google Icon" width="24" height="24" />}
-                onClick={() => googleSignIn(setUser)}>
+                onClick={() => googleSignIn(setUser, fingerprint)}>
                 Sign In with Google
             </Button>
         </Stack>
