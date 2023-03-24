@@ -3,11 +3,13 @@ from users.models import PHUser
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .services.registration_service import RegistrationService
+from .services.forgotpassword_service import ForgotPasswordService
 
 '''
 https://stackoverflow.com/questions/62498581/typeerror-when-merging-dictionaries-unsupported-operand-types-for-dict-a
 source combining dictionaries
 '''
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -24,7 +26,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             raise serializers.ValidationError(
                 "A user with that email already exists.")
 
-        return value
+        return value    
 
     def validate_password(self, value):
         return make_password(value)
