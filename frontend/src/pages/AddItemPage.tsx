@@ -98,6 +98,9 @@ export default function AddItemPage() {
           <Button variant="contained" onClick={sendRequest}>
             Add
           </Button>
+          <Button variant="contained" onClick={() => navigate("/")}>
+            Cancel
+          </Button>
 
         </Stack>
 

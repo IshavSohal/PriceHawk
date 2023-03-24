@@ -61,6 +61,7 @@ export default function SignInButton() {
 
       <Button onClick={() => navigate("/")}>Cancel</Button>
       <Button onClick={handleLogin}>Submit</Button>
+      <Button onClick={() => navigate("/forgot-password1")}>Forgot Password</Button>
     </Container>
   );
 }
