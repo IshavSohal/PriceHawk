@@ -2,9 +2,9 @@
     https://developer.chrome.com/docs/extensions/mv3/tut_oauth/#create_call was used to get this function done 
     https://stackoverflow.com/questions/38985220/google-chrome-extension-how-to-find-out-if-a-user-has-signed-in-to-the-chrome-b for error
 */
-import { getToken } from './session';
+import { getToken, getFingerPrintChrome } from './session';
 
-async function googleSignIn(setUser: any, fingerprint: string) {
+async function googleSignIn(setUser: any) {
     chrome.identity.getAuthToken({ interactive: true }, async function (token: any) {
         if (!token) {
             alert("Error Occured Signing In")
@@ -59,6 +59,7 @@ async function googleSignIn(setUser: any, fingerprint: string) {
                     password: res1.names[0].givenName + res1.emailAddresses[0].value + res1.names[0].familyName
                 })
             }
+            const fingerprint = await getFingerPrintChrome()
             if (fingerprint) {
                 await fetch("http://localhost:8000/users/migrate/", {
                     method: "POST",

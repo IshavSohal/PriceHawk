@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { ClientJS } from 'clientjs';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Alert, Container } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { getFingerPrintChrome } from '../utilities/session';
 
 export default function SignInButton() {
     const navigate = useNavigate();
@@ -12,12 +12,6 @@ export default function SignInButton() {
     const [emailVerify, setEmailVerify] = useState("");
     const [passwordVerify, setPasswordVerify] = useState("");
     const [alert, setAlert] = useState<null | string>(null);
-    const [fingerprint, setFingerprint] = useState("")
-
-    useEffect(() => {
-        const client = new ClientJS();
-        setFingerprint(client.getFingerprint());
-    }, []);
 
     async function handleRegister() {
         if (email !== emailVerify || password !== passwordVerify) {
@@ -44,7 +38,7 @@ export default function SignInButton() {
                 },
                 body: JSON.stringify({
                     email: email,
-                    guestid: fingerprint
+                    guestid: await getFingerPrintChrome()
                 })
             })
             navigate("/");
