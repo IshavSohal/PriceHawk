@@ -54,7 +54,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return get_object_or_404(PHUser, id=self.request.user.id)
 
 
-    @action(detail=False)
+    @action(detail=False, methods=['post'])
     def resetpassword(self, request):
         email = request.query_params.get('email')
         user = User.objects.filter(email=email)
@@ -68,7 +68,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response('', status=status.HTTP_200_OK)
         
 
-    @action(detail=False)
+    @action(detail=False, methods=['post'])
     def changepassword(self, request):
         email = request.query_params.get('email')
         password = request.query_params.get('password')
