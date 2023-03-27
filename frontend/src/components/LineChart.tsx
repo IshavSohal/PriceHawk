@@ -1,6 +1,6 @@
 import { CanvasJSChart } from 'canvasjs-react-charts';
 import { useEffect, useState } from 'react';
-import { getToken } from '../utilities/session';
+import { getFingerPrintChrome, getToken } from '../utilities/session';
 
 interface Price {
     id: number;
@@ -46,13 +46,18 @@ const LineChart = ({ item_id }: { item_id: number }) => {
     useEffect(() => {
 
         async function getPrices(id: number) {
+            const token = await getToken()
+            let response
             // `https://mocki.io/v1/5f67f9ed-fd80-4e4d-8e93-690afcbedcc3`
             // `https://mocki.io/v1/f51ce6f8-10a5-4416-8956-188663a29932`
-            const response = await fetch(`${API}/items/prices/${id}/`, {
-                headers: {
-                    "Authorization": `Token ${await getToken()}`
-                }
-            });
+            if (token)
+                response = await fetch(`${API}/items/prices/${id}/`, {
+                    headers: {
+                        "Authorization": `Token ${token}`
+                    }
+                });
+            else
+                response = await fetch(`${API}/items/prices/${await getFingerPrintChrome()}/${id}/`);
 
             if (response.ok) {
                 const data = await response.json();
