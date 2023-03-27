@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button, Divider, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
-import { getToken } from '../utilities/session';
+import { getFingerPrintChrome, getToken, setFingerPrintChrome } from '../utilities/session';
 import googleSignIn from '../utilities/googleSignIn';
+import { ClientJS } from "clientjs"
 
 type CurrentUserResponse = {
     email: string;
@@ -20,21 +21,27 @@ export default function Home() {
             }
         });
         await chrome.storage.local.remove("token");
-        chrome.identity?.clearAllCachedAuthTokens(() => console.log())
+        chrome.identity?.clearAllCachedAuthTokens(() => { })
         setUser(null);
     }
 
     useEffect(() => {
         async function currentUser() {
-            const response = await fetch("http://localhost:8000/users/current/", {
-                headers: {
-                    "Authorization": `Token ${await getToken()}`
-                }
-            });
-            if (response.status === 200) {
+            const token = await getToken()
+            if (token) {
+                const response = await fetch("http://localhost:8000/users/current/", {
+                    headers: {
+                        "Authorization": `Token ${token}`
+                    }
+                });
                 setUser(await response.json());
-            } else {
+            }
+            else {
                 setUser(null);
+                if (!(await getFingerPrintChrome())) {
+                    const client = new ClientJS();
+                    setFingerPrintChrome(client.getFingerprint())
+                }
             }
         }
 
