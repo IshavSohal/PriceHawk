@@ -18,8 +18,14 @@ urlpatterns = [
     path('update-guest-item/<int:guest_id>/<int:item_id>/',
          UpdateGuestItemView.as_view(), name='update-guest-item'),
     path('<int:pk>/refresh/', RefreshItemView.as_view(), name='refresh-item'),
-    path('<int:pk>/refresh-guest/<int:guest_id>/', RefreshGuestItemView.as_view(), name='refresh-guest-item'),
+    path('<int:pk>/refresh-guest/<int:guest_id>/',
+         RefreshGuestItemView.as_view(), name='refresh-guest-item'),
     path('prices/<int:item_id>/', ItemsPricesView.as_view(),
          name='get-items-prices'),
-
+    path('prices/<int:guest_id>/<int:item_id>/', GuestItemsPricesView.as_view(),
+         name='get-guest-items-prices'),
+    path('prices/delete/<int:item_id>/', DeleteItemPricesView.as_view(),
+         name='delete-items-prices'),
+    path('prices/delete/<int:guest_id>/<int:item_id>/', DeleteGuestItemPricesView.as_view(),
+         name='delete-guest-items-prices'),
 ]
