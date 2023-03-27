@@ -1,32 +1,38 @@
 {
-  "manifest_version": 3,
-  "name": "Price Hawk",
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzgjD7U8NYcLJCE+FWRQBRU7DxiHWU0VbSURqtEOEo0Hi+jbwd0uXXVnhX7ifyqF7Z8ebFCsDdBNZ2gXqfSp5iVb2CBUsV7YLcyXMGtx/yIOC/x6/InzipQSKCQa6/iK9GFGH5m3n4jrsrvnCnskoarzDlin0uTRDHKLiYEUV6f0qY9waxh5yNx9h16ut/IzNZwMZRTIZWeVOGT0Vp8wurde2gsxrOTmNEx2VzvxpPk8Io92OIhHtwcr8CO1dFwHFbaVN3MgMuuelMMW4Eu/AQ3/uzJ/CXSDcI+U2H7DhHg4vjGmjBuqodEKnDFwgWZOa4sPzUxvp4v8k/bGcxW/gdQIDAQAB",
-  "version": "0.1.0",
-  "author": "CSC301 Placeholder",
-  "description": "Universal price tracker.",
-  "permissions": [
-    "storage",
-    "identity",
-    "contextMenus",
-    "tabs"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "js": ["content.js"]
-  }],
-  "action": {
-    "default_title": "Popup",
-    "default_popup": "popup.html"
-  },
-  "oauth2": {
-    "client_id": "563320982502-jrd38d0hk60jmfqh1t6ohf3egkjqggi9.apps.googleusercontent.com",
-    "scopes": [
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile"
-    ]
-  }
+    "manifest_version": 3,
+    "name": "Price Hawk",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzgjD7U8NYcLJCE+FWRQBRU7DxiHWU0VbSURqtEOEo0Hi+jbwd0uXXVnhX7ifyqF7Z8ebFCsDdBNZ2gXqfSp5iVb2CBUsV7YLcyXMGtx/yIOC/x6/InzipQSKCQa6/iK9GFGH5m3n4jrsrvnCnskoarzDlin0uTRDHKLiYEUV6f0qY9waxh5yNx9h16ut/IzNZwMZRTIZWeVOGT0Vp8wurde2gsxrOTmNEx2VzvxpPk8Io92OIhHtwcr8CO1dFwHFbaVN3MgMuuelMMW4Eu/AQ3/uzJ/CXSDcI+U2H7DhHg4vjGmjBuqodEKnDFwgWZOa4sPzUxvp4v8k/bGcxW/gdQIDAQAB",
+    "version": "0.1.0",
+    "author": "CSC301 Placeholder",
+    "description": "Universal price tracker.",
+    "permissions": [
+        "storage",
+        "identity",
+        "contextMenus",
+        "tabs"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "action": {
+        "default_title": "Popup",
+        "default_popup": "popup.html"
+    },
+    "oauth2": {
+        "client_id": "563320982502-jrd38d0hk60jmfqh1t6ohf3egkjqggi9.apps.googleusercontent.com",
+        "scopes": [
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile"
+        ]
+    }
 }
