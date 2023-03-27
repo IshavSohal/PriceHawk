@@ -11,49 +11,55 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getToken } from "../utilities/session";
+import { getFingerPrintChrome, getToken } from "../utilities/session";
 import TrackingPageRow from "../components/TrackingPageRow";
 
 type Item = {
-  id: number;
-  name: string;
-  price: number;
+    id: number;
+    name: string;
+    price: number;
 };
 
 const TrackingPage = () => {
-  const [dataNew, setDataNew] = useState([] as Item[]);
+    const [dataNew, setDataNew] = useState([] as Item[]);
 
-  useEffect(() => {
-    async function getData() {
-      const response = await fetch("http://localhost:8000/items/get-items/", {
-        headers: {
-          Authorization: `Token ${await getToken()}`,
-        },
-      });
-      setDataNew(await response.json());
-    }
-    getData();
-  }, []);
+    useEffect(() => {
+        async function getData() {
+            const token = await getToken()
+            let response
+            if (token)
+                response = await fetch("http://localhost:8000/items/get-items/", {
+                    headers: {
+                        Authorization: `Token ${await getToken()}`,
+                    },
+                });
+            else
+                response = await fetch(`http://localhost:8000/items/get-guest-items/${await getFingerPrintChrome()}/`);
 
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Price</TableCell>
-            <TableCell>Refresh</TableCell>
-            <TableCell>Delete</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {dataNew.map((row) => (
-            <TrackingPageRow key={row.id} {...row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+            setDataNew(await response.json());
+        }
+        getData();
+    }, []);
+
+    return (
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Refresh</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {dataNew.map((row) => (
+                        <TrackingPageRow key={row.id} {...row} />
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
 };
 
 export default TrackingPage;

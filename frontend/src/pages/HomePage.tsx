@@ -12,6 +12,7 @@ type CurrentUserResponse = {
 export default function Home() {
     const navigate = useNavigate();
     const [user, setUser] = useState<CurrentUserResponse | null>(null);
+    const [fingerprint, setFingerprint] = useState("")
 
     async function handleLogout() {
         await fetch("http://localhost:8000/users/logout/", {
@@ -42,11 +43,12 @@ export default function Home() {
                     const client = new ClientJS();
                     setFingerPrintChrome(client.getFingerprint())
                 }
+                setFingerprint(await getFingerPrintChrome())
             }
         }
 
         currentUser();
-    }, []);
+    }, [user]);
 
     if (user) {
         return (
@@ -83,35 +85,45 @@ export default function Home() {
     }
 
     return (
-        <Stack direction="column" spacing={2}>
-            <Button
-                variant="contained"
-                onClick={() => navigate("/login")}>
-                Login
-            </Button>
+        <>
+            {`Guest User ${fingerprint}`}
 
-            <Button
-                variant="contained"
-                onClick={() => navigate("/register")}>
-                Register
-            </Button>
+            <Stack direction="column" spacing={2}>
+                <Button
+                    variant="contained"
+                    onClick={() => navigate("/login")}>
+                    Login
+                </Button>
 
-            <Button
-                variant="contained"
-                onClick={() => navigate("/add-item")}>
-                Add-Item
-            </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => navigate("/register")}>
+                    Register
+                </Button>
 
-            {
-                // Icon on Button https://stackoverflow.com/questions/66095141/how-to-put-an-icon-on-in-the-corner-of-a-material-ui-button
-            }
-            <Button
-                variant="outlined"
-                color="success"
-                startIcon={<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5q0FP74VV9wbfwP378_7kj7iDomHuKrxkXsxDdUT28V9dlVMNUe-EMzaLwaFhneeuZI&usqp=CAU" alt="google Icon" width="24" height="24" />}
-                onClick={() => googleSignIn(setUser)}>
-                Sign In with Google
-            </Button>
-        </Stack>
+                <Button
+                    variant="contained"
+                    onClick={() => navigate("/add-item")}>
+                    Add-Item
+                </Button>
+
+                <Button
+                    variant="contained"
+                    onClick={() => navigate("/tracking-page")}>
+                    Tracking Page
+                </Button>
+
+                {
+                    // Icon on Button https://stackoverflow.com/questions/66095141/how-to-put-an-icon-on-in-the-corner-of-a-material-ui-button
+                }
+                <Button
+                    variant="outlined"
+                    color="success"
+                    startIcon={<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5q0FP74VV9wbfwP378_7kj7iDomHuKrxkXsxDdUT28V9dlVMNUe-EMzaLwaFhneeuZI&usqp=CAU" alt="google Icon" width="24" height="24" />}
+                    onClick={() => googleSignIn(setUser)}>
+                    Sign In with Google
+                </Button>
+            </Stack>
+        </>
     );
 }

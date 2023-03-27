@@ -29,6 +29,18 @@ class GetItemsView(ListAPIView):
         return Item.objects.filter(user=self.request.user)
 
 
+class GetGuestItemsView(ListAPIView):
+    """
+    Handles get request to display all
+    the guest user's items in their tracking page
+    """
+    serializer_class = ItemSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        return Item.objects.filter(guest_session=self.kwargs['guest_id'])
+
+
 class DeleteItemView(DestroyAPIView):
     """
     Handles delete request
@@ -38,6 +50,18 @@ class DeleteItemView(DestroyAPIView):
 
     def get_object(self):
         return get_object_or_404(Item, pk=self.kwargs['item_id'])
+
+
+class DeleteGuestItemView(DestroyAPIView):
+    """
+    Handles delete request
+    to delete a guest user's item
+    """
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self):
+        return Item.objects.filter(guest_session=self.kwargs['guest_id'], pk=self.kwargs['item_id'])
+
 
 class UpdateItemView(UpdateAPIView):
     """
@@ -51,6 +75,18 @@ class UpdateItemView(UpdateAPIView):
         return get_object_or_404(Item, id=self.kwargs['item_id'])
 
 
+class UpdateGuestItemView(UpdateAPIView):
+    """
+    Handles patch request
+    to update a guest user's item
+    """
+    serializer_class = ItemSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_object(self):
+        return get_object_or_404(Item, guest_session=self.kwargs['guest_id'], id=self.kwargs['item_id'])
+
+
 class RefreshItemView(GenericAPIView):
     """
     Handles refreshing an item's price.
@@ -58,6 +94,25 @@ class RefreshItemView(GenericAPIView):
     queryset = Item.objects.all()
     permission_classes = [IsAuthenticated]
 
+    def post(self, request, *args, **kwargs):
+        item = self.get_object()
+        price = extract_price(item.url, item.price_html)
+        if not price:
+            return Response("Error", status=400)
+        item.price = price
+        item.save()
+        Price.objects.create(item=item, value=price)
+        return Response({'price': price})
+
+
+class RefreshGuestItemView(GenericAPIView):
+    """
+    Handles refreshing an item's price.
+    """
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        return Item.objects.filter(guest_session=self.kwargs['guest_id'])
 
     def post(self, request, *args, **kwargs):
         item = self.get_object()
