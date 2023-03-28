@@ -14,11 +14,11 @@ class Command(BaseCommand):
             interval = item.user.priceInterval
             diff = now - timedelta(hours=interval)
             if latest > diff:
-                return
+                continue
 
             price = extract_price(item.url, item.price_html)
             if not price:
-                return
+                continue
             item.price = price
             item.save()
             Price.objects.create(item=item, value=price)
