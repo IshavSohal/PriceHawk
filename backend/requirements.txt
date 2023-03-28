@@ -7,3 +7,4 @@ drf-yasg==1.21.5
 beautifulsoup4==4.11.2
 requests==2.28.2
 selenium==4.8.2
+tldextract==3.4.0

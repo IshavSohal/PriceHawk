@@ -16,6 +16,7 @@ class Item(models.Model):
     guest_session = models.CharField(null=True, max_length=100)
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0.0)
+    vendor_name = models.FloatField(max_length=100)
     url = models.CharField(max_length=250)
 
     name_html = models.TextField(null=True)
