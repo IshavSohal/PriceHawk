@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from items.models import Item, Price
 from items.services.scraper import extract_price
 from rest_framework import views
+from rest_framework.exceptions import PermissionDenied
 
 
 class CreateItemsView(CreateAPIView):
@@ -67,7 +68,12 @@ class DeleteItemView(DestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        return get_object_or_404(Item, pk=self.kwargs['item_id'])
+        
+        item = get_object_or_404(Item, pk=self.kwargs['item_id'])
+        if item.guest_session:
+            raise PermissionDenied({"FORBIDDEN": "tried to delete a guest user's item"})
+            
+        return item
 
 
 class DeleteGuestItemView(DestroyAPIView):
