@@ -25,17 +25,20 @@ class GetItemsView(views.APIView):
         is_guest = False
         
         items = Item.objects.none()
+        gid = ""
         
         if user.is_anonymous:
-            is_guest = True            
-            items = Item.objects.filter(guest_session=self.kwargs['guest_id']).distinct('name')
+            is_guest = True
+            gid = request.POST.get('guest_id', "")
+            
+            items = Item.objects.filter(guest_session=gid).distinct('name')
             
             if not items:
-                serializer = ItemSerializer(items, many=True)
-                return Response(serializer.data)
-            
-        if not items:
+                return Response({"UNAUTHORIZED": "invalid guest id on unauthenticated request"},status=401)
+        else:
             items = Item.objects.filter(user=user).distinct('name')
+            
+            #return empty set if user has no items
             if not items:
                 serializer = ItemSerializer(items, many=True)
                 return Response(serializer.data)
@@ -46,7 +49,7 @@ class GetItemsView(views.APIView):
             #get all vendors for the item
             vendors = Item.objects.none()
             if is_guest:
-                vendors = Item.objects.filter(guest_session=self.kwargs['guest_id'], name=item.name).values('vendor_name', 'id', 'price', 'url')
+                vendors = Item.objects.filter(guest_session=gid, name=item.name).values('vendor_name', 'id', 'price', 'url')
             else:
                 vendors = Item.objects.filter(user=user, name=item.name).values('vendor_name', 'id', 'price', 'url')
         
@@ -55,18 +58,6 @@ class GetItemsView(views.APIView):
         
         return Response(result)
 
-"""
-class GetGuestItemsView(ListAPIView):
-    
-    Handles get request to display all
-    the guest user's items in their tracking page
-    
-    serializer_class = ItemSerializer
-    permission_classes = [permissions.AllowAny]
-
-    def get_queryset(self):
-        return Item.objects.filter(guest_session=self.kwargs['guest_id'])
-"""
 
 class DeleteItemView(DestroyAPIView):
     """
@@ -78,17 +69,17 @@ class DeleteItemView(DestroyAPIView):
     def get_object(self):
         return get_object_or_404(Item, pk=self.kwargs['item_id'])
 
-"""
+
 class DeleteGuestItemView(DestroyAPIView):
-    
+    """
     Handles delete request
     to delete a guest user's item
-    
+    """
     permission_classes = [permissions.AllowAny]
 
     def get_object(self):
         return Item.objects.filter(guest_session=self.kwargs['guest_id'], pk=self.kwargs['item_id'])
-"""
+
 
 class UpdateItemView(UpdateAPIView):
     """
@@ -101,18 +92,18 @@ class UpdateItemView(UpdateAPIView):
     def get_object(self):
         return get_object_or_404(Item, id=self.kwargs['item_id'])
 
-"""
+
 class UpdateGuestItemView(UpdateAPIView):
-    
+    """
     Handles patch request
     to update a guest user's item
-    
+    """
     serializer_class = ItemSerializer
     permission_classes = [permissions.AllowAny]
 
     def get_object(self):
         return get_object_or_404(Item, guest_session=self.kwargs['guest_id'], id=self.kwargs['item_id'])
-"""
+
 
 class RefreshItemView(GenericAPIView):
     """

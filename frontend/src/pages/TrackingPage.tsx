@@ -34,7 +34,9 @@ const TrackingPage = () => {
                     },
                 });
             else
-                response = await fetch(`http://localhost:8000/items/get-guest-items/${await getFingerPrintChrome()}/`);
+                response = await fetch("http://localhost:8000/items/get-items/", {
+                    body: JSON.stringify({'guest_id': getFingerPrintChrome()})
+                });
 
             setDataNew(await response.json());
         }
