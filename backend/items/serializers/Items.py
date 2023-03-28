@@ -13,16 +13,12 @@ class ItemSerializer(serializers.ModelSerializer):
     guestid = serializers.CharField(write_only=True, required=False)
     name_html = serializers.CharField(required=False)
     price_html = serializers.CharField(required=False)
-    vendor_name = serializers.SerializerMethodField('get_vendor_from_url')
 
     class Meta:
         model = Item
         fields = ['id', 'name', 'price', 'vendor_name', 'url', 'name_html', 'price_html', 'created', 'guestid']
         extra_kwargs = {'created': {'read_only': True}, 'guestid': {'write_only': True}}
 
-    def get_vendor_from_url(self, item):
-        ext = tldextract.extract(item.url)
-        return ext.domain
 
     def validate_price(self, value):
         """
@@ -55,8 +51,8 @@ class ItemSerializer(serializers.ModelSerializer):
         request = self.context.get('request', None)
         user = request.user
         name, price, url = validated_data.get('name'), validated_data.get('price'), validated_data.get('url')
-        n_html, p_html = validated_data.get('name_html', None), validated_data.get('price_html', None)
-        v_name = validated_data.get('vendor_name')
+        n_html, p_html = validated_data.get('name_html', None), validated_data.get('price_html', None)        
+        v_name = tldextract.extract(url).domain
 
         if user.is_authenticated:
             if Item.objects.filter(user=user, name=name, url=url).exists():
