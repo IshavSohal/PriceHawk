@@ -100,11 +100,10 @@ class RefreshItemView(GenericAPIView):
         price = extract_price(item.url, item.price_html)
         if not price:
             return Response("Error", status=400)
-
-        updated = notify(item)
         item.price = price
         item.save()
         Price.objects.create(item=item, value=price)
+        updated = notify(item)
         return Response({'price': price, 'updated': updated, 'item': item.name})
 
 
@@ -125,4 +124,5 @@ class RefreshGuestItemView(GenericAPIView):
         item.price = price
         item.save()
         Price.objects.create(item=item, value=price)
+        updated = notify(item)
         return Response({'price': price})
