@@ -8,6 +8,8 @@ from items.models import Item, Price
 from items.services.scraper import extract_price
 from rest_framework import views
 from rest_framework.exceptions import PermissionDenied
+from itertools import chain
+from datetime import datetime
 
 
 class CreateItemsView(CreateAPIView):
@@ -19,7 +21,11 @@ class CreateItemsView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class SortItemVendorsByPrice(ListAPIView):
+#UI in dropdown above vendors
+# price   date     most recently updated (user input:date)
+
+
+class SortItemVendorsByPriceOrDate(ListAPIView):
     serializer_class = ItemSerializer
     permission_classes = [permissions.AllowAny]
     
@@ -27,12 +33,85 @@ class SortItemVendorsByPrice(ListAPIView):
         
         user = self.request.user
         item_name = self.request.POST.get('item_name', "")
+        type = self.request.POST.get('type', "")
+        order = self.request.POST.get('order', "")
         
         if user.is_anonymous:
             guest_id = self.request.POST.get('guest_id', "")
-            return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('price')
+                
+            if type == "price":
+                if order == "+":
+                    return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('price')
+                elif order == "-":
+                    return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('-price')
+                
+            elif type == "date":
+                if order == "+":
+                    return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('created')
+                elif order == "-":
+                    return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('-created')
         
-        return Item.objects.filter(name=item_name, user=user).order_by('price')
+        if type == "price":
+            if order == "+":
+                return Item.objects.filter(name=item_name, user=user).order_by('price')
+            elif order == "-":
+                return Item.objects.filter(name=item_name, user=user).order_by('-price')
+                
+        elif type == "date":
+            if order == "+":
+                return Item.objects.filter(name=item_name, user=user).order_by('created')
+            elif order == "-":
+                return Item.objects.filter(name=item_name, user=user).order_by('-created')
+
+        #return empty queryset if any errors
+        return Item.objects.none()
+
+"""
+    Most recently updated items' price.
+    returns all vendors of an item (items with same name) that have
+    had a price change after a given date (inputted in frontend by user)
+"""
+class SortItemVendorsMRU(ListAPIView):
+    serializer_class = ItemSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def get_queryset(self):
+        
+        user = self.request.user
+        
+        #must have format "2014-04-07"
+        date = self.request.POST.get('date', "")
+        date = datetime.strptime(date, "%Y-%m-%d").date()
+        
+        item_name = self.request.POST.get('item_name', "")
+        
+        vendors = Item.objects.none()
+        
+        if user.is_anonymous:
+            guest_id = self.request.POST.get('guest_id', "")
+            vendors = Item.objects.filter(guest_session=guest_id, name=item_name)
+        else:
+            vendors = Item.objects.filter(user=user, name=item_name)
+        
+        result_ids = []
+        
+        for v in vendors:
+            #check all prices
+            #if theres a price with date > date, add it to result queryset
+        
+            for p in v.Prices.all():
+                
+                if(p.date.date()) >= date:
+                    result_ids += [v.pk]
+                    break
+        
+        #to show the lowest price (at the top)
+        #among all other recently updated vendors
+        #(recently updated: updated after given date)
+        result = Item.objects.filter(pk__in=result_ids).order_by('price')
+        
+        return result
+
 
 class GetItemsView(views.APIView):
 
@@ -65,9 +144,9 @@ class GetItemsView(views.APIView):
             #get all vendors for the item
             vendors = Item.objects.none()
             if is_guest:
-                vendors = Item.objects.filter(guest_session=gid, name=item.name).values('vendor_name', 'id', 'price', 'url')
+                vendors = Item.objects.filter(guest_session=gid, name=item.name).values('vendor_name', 'id', 'price', 'url', 'created')
             else:
-                vendors = Item.objects.filter(user=user, name=item.name).values('vendor_name', 'id', 'price', 'url')
+                vendors = Item.objects.filter(user=user, name=item.name).values('vendor_name', 'id', 'price', 'url', 'created')
         
             item_with_vendors = [{item.name: vendors}]
             result += item_with_vendors
