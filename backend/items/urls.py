@@ -7,6 +7,7 @@ app_name = 'items'
 urlpatterns = [
     path('create/', CreateItemsView.as_view(), name='add-item'),
     path('get-items/', GetItemsView.as_view(), name='get-items'),
+    path('sort-item-price/', SortItemVendorsByPrice.as_view(), name='sort-price'),
     path('delete-item/<int:item_id>/', DeleteItemView.as_view(), name='delete-item'),
     path('delete-guest-item/<int:guest_id>/<int:item_id>/', DeleteGuestItemView.as_view(), name='delete-guest-item'),
     path('update-item/<int:item_id>/', UpdateItemView.as_view(), name='update-item'),

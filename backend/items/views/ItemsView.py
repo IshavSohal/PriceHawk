@@ -19,6 +19,21 @@ class CreateItemsView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
+class SortItemVendorsByPrice(ListAPIView):
+    serializer_class = ItemSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def get_queryset(self):
+        
+        user = self.request.user
+        item_name = self.request.POST.get('item_name', "")
+        
+        if user.is_anonymous:
+            guest_id = self.request.POST.get('guest_id', "")
+            return Item.objects.filter(name=item_name, guest_session=guest_id).order_by('price')
+        
+        return Item.objects.filter(name=item_name, user=user).order_by('price')
+
 class GetItemsView(views.APIView):
 
     def get(self, request):
