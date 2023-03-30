@@ -13,7 +13,6 @@ export default function Settings() {
     const [password, setPassword] = useState("")
     const [emailnotifications, setEmailNotifications] = useState(false)
     const [priceInterval, setPriceInterval] = useState(12)
-    const [pro, setPro] = useState(false)
     const [google, setGoogle] = useState(false)
 
     useEffect(() => {
@@ -30,7 +29,6 @@ export default function Settings() {
                 setEmail(values.email)
                 setEmailNotifications(values.emailnotifications)
                 setPriceInterval(values.priceInterval)
-                setPro(values.pro)
                 setGoogle(values.google)
                 setOthermail(values.email)
             }
@@ -139,9 +137,7 @@ export default function Settings() {
             fullWidth
             variant="standard"
             value={priceInterval}
-            disabled={!pro}
             color={(!priceInterval || priceInterval < 1 || priceInterval > 24) ? "error" : "success"}
-            helperText={pro ? "" : "Only Pro Users can change the Price Update Interval"}
             onChange={(e) => setPriceInterval(parseInt(e.target.value))}
         />
         <br />
