@@ -3,7 +3,7 @@ from users.models import PHUser
 from items.models import Item, Price
 
 def notify(item):
-    if item.user and item.emailnotifications:
+    if item.user and item.user.emailnotifications:
         send_mail(
             f'Price Hawk: {item.name} Update',
             f'{item.name} is now worth ${item.price}. You can check it out at {item.url}',
