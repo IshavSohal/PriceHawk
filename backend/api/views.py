@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
 from users.models import PHUser
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import action
+from rest_framework import viewsets, permissions, status, authentication
+from rest_framework.decorators import actions
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, get_object_or_404
 from api.serializers import UserSerializer, GoogleUserSerializer
@@ -54,13 +54,14 @@ class UserViewSet(viewsets.ModelViewSet):
         return get_object_or_404(PHUser, id=self.request.user.id)
 
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], authentication_classes = [], permission_classes=[permissions.AllowAny])
     def resetpassword(self, request):
-        email = request.query_params.get('email')
-        user = User.objects.filter(email=email)
+        #need to use .data, not .query_params
+        data = json.loads(request.body)
+        email = data['email']
 
-        if not email:
-            return Response("Email field is required", status=status.HTTP_400_BAD_REQUEST)
+      # if not email:
+      #     return Response("Email field is required", status=status.HTTP_400_BAD_REQUEST)
         if not User.objects.filter(email=email).exists():
             return Response("A user with that email does not exist", status=status.HTTP_400_BAD_REQUEST)
 
@@ -68,12 +69,11 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response('', status=status.HTTP_200_OK)
         
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], authentication_classes = [], permission_classes=[])
     def changepassword(self, request):
-        email = request.query_params.get('email')
-        password = request.query_params.get('password')
-        key = request.query_params.get('key')
-        user = User.objects.filter(email=email)
+        #need to use .data, not .query_params
+        password = request.data.get('password')
+        key = request.data.get('key')
 
         if ForgotPasswordService.validate_key(key):
             user = User.objects.filter(id=ForgotPasswordService.hashtable[key][0])

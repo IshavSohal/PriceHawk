@@ -10,14 +10,13 @@ export default function ForgotPassword1(){
     const [alert, setAlert] = useState<null | string>(null);
 
     async function handleForgotPassword1(){
-      
         const res = await fetch("http://localhost:8000/users/resetpassword/", {
-          method: "POST",
+          method: "POST", 
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            username: email,
+            email: email
           })
         });
     
