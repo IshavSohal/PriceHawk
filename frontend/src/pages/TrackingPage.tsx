@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import { getFingerPrintChrome, getToken } from "../utilities/session";
 import TrackingPageRow from "../components/TrackingPageRow";
 
+
 const TrackingPage = () => {
     const [dataNew, setDataNew] = useState([]);
     const [data, setData] = useState([])
@@ -72,6 +73,7 @@ const TrackingPage = () => {
                     </Accordion>
                 ))}
             </Table>
+
             <br/>
             <br/>
             <Button onClick={() => navigate(-1)}>
@@ -80,6 +82,7 @@ const TrackingPage = () => {
             <br/>
             <br/>
         </TableContainer>)
+
 };
 
 export default TrackingPage;

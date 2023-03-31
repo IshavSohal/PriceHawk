@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import LineChart from '../../components/LineChart';
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router";
 
 export default function ItemPricesPage() {
-
+    const navigate = useNavigate()
     const { id } = useParams();
     const [itemId, setItemId] = useState(-1);
     const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function ItemPricesPage() {
     return (
         <>
             <LineChart item_id={itemId} />
+
             <br/>
             <br/>
             <Button onClick={() => navigate(-1)}>
@@ -26,6 +29,7 @@ export default function ItemPricesPage() {
             </Button>
             <br/>
             <br/>
+
         </>
     )
 }

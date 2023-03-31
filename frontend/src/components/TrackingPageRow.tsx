@@ -8,15 +8,20 @@ import {
     DialogTitle,
     TableCell,
     TableRow,
+    Alert
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getFingerPrintChrome, getToken } from "../utilities/session";
 
+
 export default function TrackingPageRow(props) {
+
     const [deleted, setDeleted] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openRefresh, setOpenRefresh] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
+    const [refreshText, setRefreshText] = useState("");
     const [price, setPrice] = useState(props.price);
     const navigate = useNavigate();
 
@@ -41,6 +46,11 @@ export default function TrackingPageRow(props) {
         if (res.ok) {
             const data = await res.json();
             setPrice(await data["price"]);
+            console.log(data)
+            if (data["updated"]) {
+                setRefreshText(data["item"] + " has a new price!")
+                setOpenRefresh(true);
+            }
         }
         setRefreshing(false);
     }
@@ -49,12 +59,6 @@ export default function TrackingPageRow(props) {
         const token = await getToken()
 
         if (token) {
-            await fetch(`http://localhost:8000/items/prices/delete/${props.id}/`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            });
             await fetch(`http://localhost:8000/items/delete-item/${props.id}/`, {
                 method: "DELETE",
                 headers: {
@@ -63,7 +67,6 @@ export default function TrackingPageRow(props) {
             });
         }
         else {
-            await fetch(`http://localhost:8000/items/prices/delete/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
             await fetch(`http://localhost:8000/items/delete-guest-item/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
         }
         setDeleted(true);
@@ -74,14 +77,21 @@ export default function TrackingPageRow(props) {
     }
 
     return (
+        <>
         <TableRow
             key={props.id}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-        >
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+
             <TableCell component="th" scope="row">
-                <Button onClick={() => navigate(`/items/${props.id}`)}>
-                    {props.vendor_name}
-                </Button>
+
+                {props.price_html 
+                    ?
+                    <Button onClick={() => navigate(`/items/${props.id}`)}>
+                        {props.name}
+                    </Button>
+                    : 
+                    <>{props.name}</>}
+
             </TableCell>
 
             <TableCell>
@@ -89,7 +99,11 @@ export default function TrackingPageRow(props) {
             </TableCell>
 
             <TableCell>
-                <Button onClick={handleRefresh}>Refresh</Button>
+                {props.price_html 
+                    ?
+                    <Button onClick={handleRefresh}>Refresh</Button>
+                    : 
+                    <>Not Refreshable</>}
             </TableCell>
 
             <TableCell>
@@ -115,6 +129,28 @@ export default function TrackingPageRow(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+
+            <Dialog
+                open={openRefresh}
+                onClose={() => setOpenRefresh(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Price Update"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {refreshText}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpenRefresh(false)}>Ok</Button>
+                </DialogActions>
+            </Dialog>
+
+
         </TableRow>
+
+        </>
     );
 }

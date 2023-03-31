@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Grid } from "@mui/material";
 import { useNavigate } from 'react-router';
 import { Stack } from '@mui/system';
 import { getFingerPrintChrome, getToken } from '../utilities/session';
@@ -72,7 +72,7 @@ export default function AddItemPage() {
     return (
         <>
 
-            <Stack style={{ width: "400px", height: "250px" }} spacing={2}>
+            <Stack style={{ width: "400px" }} spacing={2}>
                 <TextField id="outlined-multiline" label='Item Name' onChange={(e) => {
                     setValues(prevValues => ({ ...prevValues, name: e.target.value }))
                 }} />
@@ -83,9 +83,15 @@ export default function AddItemPage() {
                     setValues(prevValues => ({ ...prevValues, url: e.target.value }))
                 }} />
 
-                <Button variant="contained" onClick={sendRequest}>
-                    Add
-                </Button>
+                <Grid container spacing={2}>
+                    <Button variant="contained" onClick={sendRequest}>
+                        Add
+                    </Button>
+
+                    <Button variant="contained" style={{marginLeft: "1%"}} onClick={() => navigate(-1)}>
+                        Cancel 
+                    </Button>
+                </Grid>
 
                 <Button variant="contained" onClick={() => navigate(-1)}>
                     Cancel

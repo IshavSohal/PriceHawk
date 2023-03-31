@@ -12,7 +12,7 @@ class Item(models.Model):
     store.
     """
 
-    user = models.ForeignKey(to=PHUser, on_delete=models.SET_NULL, null=True, related_name='items')
+    user = models.ForeignKey(to=PHUser, on_delete=models.CASCADE, null=True, related_name='items')
     guest_session = models.CharField(null=True, max_length=100)
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0.0)
@@ -38,7 +38,7 @@ class Price(models.Model):
     Object model for prices.
     """
 
-    item = models.ForeignKey(to=Item, related_name="Prices", null=True, on_delete=models.SET_NULL)
+    item = models.ForeignKey(to=Item, related_name="Prices", null=True, on_delete=models.CASCADE)
     value = models.FloatField(default=0.0)
     date = models.DateTimeField(auto_now_add=True)
 

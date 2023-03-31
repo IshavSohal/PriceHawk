@@ -12,8 +12,8 @@ function findPrice(): { text: string; attributes: string } | undefined {
     let current = window.getSelection()?.getRangeAt(0)
         .startContainer.parentElement;
     while (current) {
-        const rx = /\$(\d+(?:\.\d+)?)/;
-        const price = current.textContent?.match(rx)?.at(1);
+        const rx = /\$(\d+(?:,\d+)*(?:\.\d+)?)/;
+        const price = current.textContent?.match(rx)?.at(1)?.replaceAll(",", "");
         if (price && current.className.length > 0) {
             return {
                 text: price,

@@ -60,6 +60,7 @@ class UserViewSet(viewsets.ModelViewSet):
         items = Item.objects.filter(guest_session=request.data.get('guestid'))
         for item in items.all():
             item.user = user
+            item.guest_session = None
             item.save()
         return Response(status=status.HTTP_200_OK)
     

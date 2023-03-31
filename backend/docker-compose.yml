@@ -11,6 +11,14 @@ services:
     volumes:
       - "./:/app"
 
+  scheduler:
+    build: "."
+    depends_on:
+      - "db"
+    volumes:
+      - "./:/app"
+    command: "crond -f -l 2"
+
   db:
     image: "postgres:15-alpine"
     environment:
