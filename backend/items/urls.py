@@ -24,10 +24,5 @@ urlpatterns = [
          name='get-items-prices'),
     path('prices/<int:guest_id>/<int:item_id>/', GuestItemsPricesView.as_view(),
          name='get-guest-items-prices'),
-    path('prices/delete/<int:item_id>/', DeleteItemPricesView.as_view(),
-         name='delete-items-prices'),
-    path('prices/delete/<int:guest_id>/<int:item_id>/', DeleteGuestItemPricesView.as_view(),
-         name='delete-guest-items-prices'),
-
     path('testprice/', testprice, name='testprice')
 ]

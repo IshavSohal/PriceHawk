@@ -18,6 +18,7 @@ type Props = {
     id: number;
     name: string;
     price: number;
+    price_html: string;
 };
 
 export default function TrackingPageRow(props: Props) {
@@ -63,12 +64,6 @@ export default function TrackingPageRow(props: Props) {
         const token = await getToken()
 
         if (token) {
-            await fetch(`http://localhost:8000/items/prices/delete/${props.id}/`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            });
             await fetch(`http://localhost:8000/items/delete-item/${props.id}/`, {
                 method: "DELETE",
                 headers: {
@@ -77,7 +72,6 @@ export default function TrackingPageRow(props: Props) {
             });
         }
         else {
-            await fetch(`http://localhost:8000/items/prices/delete/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
             await fetch(`http://localhost:8000/items/delete-guest-item/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
         }
         setDeleted(true);
@@ -91,12 +85,16 @@ export default function TrackingPageRow(props: Props) {
         <>
         <TableRow
             key={props.id}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-        >
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+
             <TableCell component="th" scope="row">
-                <Button onClick={() => navigate(`/items/${props.id}`)}>
-                    {props.name}
-                </Button>
+                {props.price_html 
+                    ?
+                    <Button onClick={() => navigate(`/items/${props.id}`)}>
+                        {props.name}
+                    </Button>
+                    : 
+                    <>{props.name}</>}
             </TableCell>
 
             <TableCell>
@@ -104,7 +102,11 @@ export default function TrackingPageRow(props: Props) {
             </TableCell>
 
             <TableCell>
-                <Button onClick={handleRefresh}>Refresh</Button>
+                {props.price_html 
+                    ?
+                    <Button onClick={handleRefresh}>Refresh</Button>
+                    : 
+                    <>Not Refreshable</>}
             </TableCell>
 
             <TableCell>

@@ -18,6 +18,7 @@ type Item = {
     id: number;
     name: string;
     price: number;
+    price_html: string;
 };
 
 const TrackingPage = () => {
