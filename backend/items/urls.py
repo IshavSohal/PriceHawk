@@ -28,4 +28,6 @@ urlpatterns = [
          name='delete-items-prices'),
     path('prices/delete/<int:guest_id>/<int:item_id>/', DeleteGuestItemPricesView.as_view(),
          name='delete-guest-items-prices'),
+
+    path('testprice/', testprice, name='testprice')
 ]

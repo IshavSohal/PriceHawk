@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from items.models import Item, Price
 from items.services.scraper import extract_price
+from items.services.notifier import check_updated
+from django.shortcuts import render
 
 
 class CreateItemsView(CreateAPIView):
@@ -99,10 +101,11 @@ class RefreshItemView(GenericAPIView):
         price = extract_price(item.url, item.price_html)
         if not price:
             return Response("Error", status=400)
+        updated = check_updated(item, price)
         item.price = price
         item.save()
         Price.objects.create(item=item, value=price)
-        return Response({'price': price})
+        return Response({'price': price, 'updated': updated, 'item': item.name})
 
 
 class RefreshGuestItemView(GenericAPIView):
@@ -119,7 +122,13 @@ class RefreshGuestItemView(GenericAPIView):
         price = extract_price(item.url, item.price_html)
         if not price:
             return Response("Error", status=400)
+        updated = check_updated(item, price)
         item.price = price
         item.save()
         Price.objects.create(item=item, value=price)
-        return Response({'price': price})
+        return Response({'price': price, 'updated': updated, 'item': item.name})
+        
+
+# for testing 
+def testprice(request):
+    return render(request, "item.html")
