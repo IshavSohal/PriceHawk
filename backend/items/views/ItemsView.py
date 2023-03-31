@@ -20,7 +20,7 @@ class CreateItemsView(CreateAPIView):
 
 
 class GetItemsView(views.APIView):
-
+   
     def post(self, request):
         user = request.user
         is_guest = False
@@ -30,7 +30,7 @@ class GetItemsView(views.APIView):
         
         if user.is_anonymous:
             is_guest = True
-            gid = request.POST.get('guest_id', "")
+            gid = request.data.get('guest_id', "")
             
             items = Item.objects.filter(guest_session=gid).distinct('name')
             

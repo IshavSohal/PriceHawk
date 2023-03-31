@@ -17,9 +17,10 @@ import TrackingPageRow from "../components/TrackingPageRow";
 const TrackingPage = () => {
     const [dataNew, setDataNew] = useState([]);
     const [data, setData] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
-        
+
         async function getData() {
             const token = await getToken()
             let response
@@ -45,7 +46,7 @@ const TrackingPage = () => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 150, maxWidth:180 }} aria-label="simple table">
+            <Table sx={{ minWidth: 150, maxWidth: 180 }} aria-label="simple table">
                 {dataNew.map((row) => (
                     <Accordion id={Object.keys(row)[0]}>
                         <AccordionSummary>
@@ -71,6 +72,13 @@ const TrackingPage = () => {
                     </Accordion>
                 ))}
             </Table>
+            <br/>
+            <br/>
+            <Button onClick={() => navigate(-1)}>
+                Back
+            </Button>
+            <br/>
+            <br/>
         </TableContainer>)
 };
 
