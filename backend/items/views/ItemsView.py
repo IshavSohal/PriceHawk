@@ -21,7 +21,7 @@ class CreateItemsView(CreateAPIView):
 
 class GetItemsView(views.APIView):
 
-    def get(self, request):
+    def post(self, request):
         user = request.user
         is_guest = False
         

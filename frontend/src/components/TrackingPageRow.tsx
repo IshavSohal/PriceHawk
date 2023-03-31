@@ -13,13 +13,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getFingerPrintChrome, getToken } from "../utilities/session";
 
-type Props = {
-    id: number;
-    name: string;
-    price: number;
-};
-
-export default function TrackingPageRow(props: Props) {
+export default function TrackingPageRow(props) {
     const [deleted, setDeleted] = useState(false);
     const [open, setOpen] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
@@ -86,7 +80,7 @@ export default function TrackingPageRow(props: Props) {
         >
             <TableCell component="th" scope="row">
                 <Button onClick={() => navigate(`/items/${props.id}`)}>
-                    {props.name}
+                    {props.vendor_name}
                 </Button>
             </TableCell>
 

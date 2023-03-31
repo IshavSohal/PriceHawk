@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, CircularProgress, Divider, Stack } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, CircularProgress, Divider, Stack, Typography } from "@mui/material";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -14,30 +14,30 @@ import Paper from "@mui/material/Paper";
 import { getFingerPrintChrome, getToken } from "../utilities/session";
 import TrackingPageRow from "../components/TrackingPageRow";
 
-type Item = {
-    id: number;
-    name: string;
-    price: number;
-};
-
 const TrackingPage = () => {
-    const [dataNew, setDataNew] = useState([] as Item[]);
+    const [dataNew, setDataNew] = useState([]);
+    const [data, setData] = useState([])
 
     useEffect(() => {
+        
         async function getData() {
             const token = await getToken()
             let response
             if (token)
                 response = await fetch("http://localhost:8000/items/get-items/", {
+                    method: "POST",
                     headers: {
                         Authorization: `Token ${await getToken()}`,
                     },
                 });
             else
                 response = await fetch("http://localhost:8000/items/get-items/", {
-                    body: JSON.stringify({'guest_id': getFingerPrintChrome()})
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ 'guest_id': await getFingerPrintChrome() })
                 });
-
             setDataNew(await response.json());
         }
         getData();
@@ -45,23 +45,33 @@ const TrackingPage = () => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell>Refresh</TableCell>
-                        <TableCell>Delete</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {dataNew.map((row) => (
-                        <TrackingPageRow key={row.id} {...row} />
-                    ))}
-                </TableBody>
+            <Table sx={{ minWidth: 150, maxWidth:180 }} aria-label="simple table">
+                {dataNew.map((row) => (
+                    <Accordion id={Object.keys(row)[0]}>
+                        <AccordionSummary>
+                            <Typography>
+                                {Object.keys(row)[0]}
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Vendor</TableCell>
+                                    <TableCell>Price</TableCell>
+                                    <TableCell>Refresh</TableCell>
+                                    <TableCell>Delete</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {row[Object.keys(row)[0]].map((row2) => (
+                                    <TrackingPageRow key={row2.id} {...row2} />
+                                ))}
+                            </TableBody>
+                        </AccordionDetails>
+                    </Accordion>
+                ))}
             </Table>
-        </TableContainer>
-    );
+        </TableContainer>)
 };
 
 export default TrackingPage;
