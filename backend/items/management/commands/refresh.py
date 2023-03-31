@@ -24,6 +24,7 @@ class Command(BaseCommand):
 
                 price = extract_price(item.url, item.price_html)
                 if not price:
+                    print(f'Skipping {item.name} for {item.user.email}')
                     continue
                 print(f'{item.name} updated for {item.user.email}')
                 updated = check_updated(item, price)
