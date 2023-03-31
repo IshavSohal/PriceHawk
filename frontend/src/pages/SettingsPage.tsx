@@ -80,12 +80,12 @@ export default function Settings() {
             setAlert(alert.replace("Email must be filled. ", ""))
         }
 
-        if (isNaN(priceInterval) || priceInterval < 1 || priceInterval > 24) {
+        if (isNaN(priceInterval) || priceInterval < 0 || priceInterval > 24) {
             if (!alert.includes("Price"))
                 setAlert(alert + "Price Interval must be between 1 and 24. ")
             return false
         }
-        else if ((!isNaN(priceInterval) && priceInterval >= 1 && priceInterval <= 24) && alert.includes("Price")) {
+        else if ((!isNaN(priceInterval) && priceInterval >= 0 && priceInterval <= 24) && alert.includes("Price")) {
             setAlert(alert.replace("Price Interval must be between 1 and 24. ", ""))
         }
 
@@ -140,7 +140,7 @@ export default function Settings() {
             variant="standard"
             value={priceInterval}
             disabled={!pro}
-            color={(!priceInterval || priceInterval < 1 || priceInterval > 24) ? "error" : "success"}
+            color={(!priceInterval || priceInterval < 0 || priceInterval > 24) ? "error" : "success"}
             helperText={pro ? "" : "Only Pro Users can change the Price Update Interval"}
             onChange={(e) => setPriceInterval(parseInt(e.target.value))}
         />
