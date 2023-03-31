@@ -55,12 +55,6 @@ export default function TrackingPageRow(props: Props) {
         const token = await getToken()
 
         if (token) {
-            await fetch(`http://localhost:8000/items/prices/delete/${props.id}/`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            });
             await fetch(`http://localhost:8000/items/delete-item/${props.id}/`, {
                 method: "DELETE",
                 headers: {
@@ -69,7 +63,6 @@ export default function TrackingPageRow(props: Props) {
             });
         }
         else {
-            await fetch(`http://localhost:8000/items/prices/delete/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
             await fetch(`http://localhost:8000/items/delete-guest-item/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
         }
         setDeleted(true);
