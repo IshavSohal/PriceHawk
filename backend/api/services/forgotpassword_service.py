@@ -2,6 +2,7 @@ from django.core.mail import send_mail
 from hashlib import sha256
 from uuid import uuid4
 from datetime import datetime
+from users.models import PHUser
 
 
 class ForgotPasswordService:
@@ -19,12 +20,11 @@ class ForgotPasswordService:
         )
 
     def validate_key(key):
-        return key in hashtable
+        return key in ForgotPasswordService.hashtable
 
     def gen_key(email):
-        user = User.objects.filter(email=email)
-        user_id = user.id
+        user = PHUser.objects.filter(email=email)
         key = uuid4()
         date_time = datetime.now()
-        hashtable[key] = (user_id, date_time)
+        ForgotPasswordService.hashtable[key] = (email, date_time)
         return key

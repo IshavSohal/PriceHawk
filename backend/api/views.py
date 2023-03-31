@@ -2,12 +2,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
 from users.models import PHUser
 from rest_framework import viewsets, permissions, status, authentication
-from rest_framework.decorators import actions
+from rest_framework.decorators import action, authentication_classes, permission_classes, api_view
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, get_object_or_404
 from api.serializers import UserSerializer, GoogleUserSerializer
 from .services.registration_service import RegistrationService
 from .services.forgotpassword_service import ForgotPasswordService
+from datetime import datetime
+import uuid
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -46,7 +48,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return super().partial_update(request, *args, **kwargs)
 
     def get_permissions(self):
-        if self.action in ('create', 'validate'):
+        if self.action in ('create', 'validate', 'resetpassword', 'changepassword'):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
     
@@ -54,40 +56,46 @@ class UserViewSet(viewsets.ModelViewSet):
         return get_object_or_404(PHUser, id=self.request.user.id)
 
 
-    @action(detail=False, methods=['post'], authentication_classes = [], permission_classes=[permissions.AllowAny])
+    @action(detail=False, methods=['post'], permission_classes=[permissions.AllowAny], authentication_classes = [])
     def resetpassword(self, request):
-        #need to use .data, not .query_params
-        data = json.loads(request.body)
-        email = data['email']
+        email = request.data.get('email')
 
-      # if not email:
-      #     return Response("Email field is required", status=status.HTTP_400_BAD_REQUEST)
-        if not User.objects.filter(email=email).exists():
+        if not email:
+            return Response("Email field is required", status=status.HTTP_400_BAD_REQUEST)
+        if not PHUser.objects.filter(email=email).exists():
             return Response("A user with that email does not exist", status=status.HTTP_400_BAD_REQUEST)
 
         ForgotPasswordService.send_email(email)
         return Response('', status=status.HTTP_200_OK)
         
 
-    @action(detail=False, methods=['post'], authentication_classes = [], permission_classes=[])
+    @action(detail=False, methods=['post'], permission_classes=[permissions.AllowAny], authentication_classes = [])
     def changepassword(self, request):
-        #need to use .data, not .query_params
         password = request.data.get('password')
         key = request.data.get('key')
+        try:
+            key = uuid.UUID(key)
+        except:
+            return Response('Invalid key', status=status.HTTP_400_BAD_REQUEST)
+        
 
         if ForgotPasswordService.validate_key(key):
-            user = User.objects.filter(id=ForgotPasswordService.hashtable[key][0])
+            user = PHUser.objects.filter(email=ForgotPasswordService.hashtable[key][0])
 
-            if (datetime.now() - ForgotPasswordService.hashtable[key][1])/3600 >= 1:
+            if (datetime.now() - ForgotPasswordService.hashtable[key][1]).seconds >= 3600:
+                del ForgotPasswordService.hashtable[key]
                 return Response('Time limit exceeded', status=status.HTTP_400_BAD_REQUEST)
-                
-            #user.update(is_active=True)
-            user.set_password(password)
+
+            hashed_password = UserViewSet.serializer_class.validate_password(UserViewSet.serializer_class, password)
+            user.update(password = hashed_password)
+            
             del ForgotPasswordService.hashtable[key]
             return Response('', status=status.HTTP_200_OK)
 
         else:
-            return Response('Invalid key.', status=status.HTTP_400_BAD_REQUEST)
+            return Response('Invalid key', status=status.HTTP_400_BAD_REQUEST)
+
+        return Response('', status=status.HTTP_200_OK)
 
 
 class CreateGoogleUser(CreateAPIView):
