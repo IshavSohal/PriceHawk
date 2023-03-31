@@ -23,6 +23,7 @@ type Item = {
 
 const TrackingPage = () => {
     const [dataNew, setDataNew] = useState([] as Item[]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function getData() {
@@ -43,6 +44,7 @@ const TrackingPage = () => {
     }, []);
 
     return (
+        <>
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -60,6 +62,9 @@ const TrackingPage = () => {
                 </TableBody>
             </Table>
         </TableContainer>
+
+        <Button style={{position: 'absolute', bottom: '16px'}} onClick={() => navigate("/")}>Back</Button>
+        </>
     );
 };
 

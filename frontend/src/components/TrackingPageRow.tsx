@@ -8,6 +8,7 @@ import {
     DialogTitle,
     TableCell,
     TableRow,
+    Alert
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -23,7 +24,9 @@ type Props = {
 export default function TrackingPageRow(props: Props) {
     const [deleted, setDeleted] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openRefresh, setOpenRefresh] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
+    const [refreshText, setRefreshText] = useState("");
     const [price, setPrice] = useState(props.price);
     const navigate = useNavigate();
 
@@ -48,6 +51,11 @@ export default function TrackingPageRow(props: Props) {
         if (res.ok) {
             const data = await res.json();
             setPrice(await data["price"]);
+            console.log(data)
+            if (data["updated"]) {
+                setRefreshText(data["item"] + " has a new price!")
+                setOpenRefresh(true);
+            }
         }
         setRefreshing(false);
     }
@@ -74,6 +82,7 @@ export default function TrackingPageRow(props: Props) {
     }
 
     return (
+        <>
         <TableRow
             key={props.id}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -123,6 +132,28 @@ export default function TrackingPageRow(props: Props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+
+            <Dialog
+                open={openRefresh}
+                onClose={() => setOpenRefresh(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Price Update"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {refreshText}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpenRefresh(false)}>Ok</Button>
+                </DialogActions>
+            </Dialog>
+
+
         </TableRow>
+
+        </>
     );
 }

@@ -78,12 +78,12 @@ export default function Settings() {
             setAlert(alert.replace("Email must be filled. ", ""))
         }
 
-        if (isNaN(priceInterval) || priceInterval < 1 || priceInterval > 24) {
+        if (isNaN(priceInterval) || priceInterval < 0 || priceInterval > 24) {
             if (!alert.includes("Price"))
                 setAlert(alert + "Price Interval must be between 1 and 24. ")
             return false
         }
-        else if ((!isNaN(priceInterval) && priceInterval >= 1 && priceInterval <= 24) && alert.includes("Price")) {
+        else if ((!isNaN(priceInterval) && priceInterval >= 0 && priceInterval <= 24) && alert.includes("Price")) {
             setAlert(alert.replace("Price Interval must be between 1 and 24. ", ""))
         }
 
@@ -137,7 +137,7 @@ export default function Settings() {
             fullWidth
             variant="standard"
             value={priceInterval}
-            color={(!priceInterval || priceInterval < 1 || priceInterval > 24) ? "error" : "success"}
+            color={(!priceInterval || priceInterval < 0 || priceInterval > 24) ? "error" : "success"}
             onChange={(e) => setPriceInterval(parseInt(e.target.value))}
         />
         <br />
