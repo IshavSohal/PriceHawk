@@ -12,7 +12,6 @@ export default function ForgotPassword2(){
     const [alert, setAlert] = useState<null | string>(null);
 
     async function handleForgotPassword2(){
-      // should be PATCH
         if (password !== passwordVerify) {
             return;
         }
