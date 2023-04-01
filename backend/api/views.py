@@ -95,7 +95,6 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             return Response('Invalid key', status=status.HTTP_400_BAD_REQUEST)
 
-        return Response('', status=status.HTTP_200_OK)
 
 
 class CreateGoogleUser(CreateAPIView):
