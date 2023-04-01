@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
 from users.models import PHUser
+from items.models import Item
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -46,13 +47,25 @@ class UserViewSet(viewsets.ModelViewSet):
         return super().partial_update(request, *args, **kwargs)
 
     def get_permissions(self):
-        if self.action in ('create', 'validate'):
+        if self.action in ('create', 'validate', 'migrate'):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated()]
     
     def get_object(self):
         return get_object_or_404(PHUser, id=self.request.user.id)
 
+    
+    @action(detail=False, methods=['post'])
+    def migrate(self, request):
+        user = get_object_or_404(PHUser, email=request.data.get('email'))
+        items = Item.objects.filter(guest_session=request.data.get('guestid'))
+        for item in items.all():
+            item.user = user
+            item.guest_session = None
+            item.save()
+        return Response(status=status.HTTP_200_OK)
+    
+    
 class CreateGoogleUser(CreateAPIView):
     serializer_class = GoogleUserSerializer
     

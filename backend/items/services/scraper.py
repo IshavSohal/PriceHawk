@@ -23,10 +23,10 @@ def extract_price(url: str, attributes: str) -> float | None:
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     for element in soup.select(class_ + id):
-        match = re.search(r'\$(\d+(?:\.\d+)?)', element.get_text())
+        match = re.search(r'\$(\d+(?:,\d+)*(?:\.\d+)?)', element.get_text())
         if match:
             driver.close()
-            return float(match.group(1))
+            return float(match.group(1).replace(',', ''))
 
     driver.close()
     return None
