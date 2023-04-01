@@ -29,7 +29,7 @@ No spikes encountered
 |Mustafa|User story 19, 17|
 |Justin|User story 12|
 |Ovidiu|User story 11, 19|
-|Ryan|User Story 23, 3, 14|
+|Ryan|User Story 23, 3, 11|
 
 <br>
 
@@ -44,7 +44,7 @@ Each team member pledges to contribute to at least 1 user story.
 |User Story|Story Acceptance Criteria|Story Points|
 |--|--|--|
 |User story 6: Forgot Password|<ul><li>Upon clicking forgot password in the login UI, another form UI should prompt the user to enter their new password and retype their new password</li><li>The user should receive an email to the email associated with their account that has a code</li><li>The user needs to input this code under the password fields and then click the change password button for their password to be reset</li><li>Upon successful reset, the form UIs should disappear, the user should get a quick tooltip that reads "password changed", and they should be logged in</li></ul>|3|
-|User Story 14:Notify Price Changes|<ul><li>The user should get an email notification to the email linked to their account (if enabled) upon a price change</li><li>These features are enabled in the settings tab (see user story 15)</li><li>In the toolbox panel (and in the extension icon itself) there should appear a notification alert (like a red exclamation mark), that when clicked, opens a small message saying that the price for one (or more) items have been changed. Upon clicking this message, the user should be redirected to their tracking info page.</li><li>The items or sellers that have changed prices recently (within a certain time frame that the user can set themselves in the options tab (user story 15)), should be marked with a new color or text to identify the items/sources that have recently had a price change</li></ul>|3|
+|User Story 14:Notify Price Changes|<ul><li>The user should get an email notification to the email linked to their account (if enabled) upon a price change</li><li>This feature is enabled in the settings tab (see user story 15)</li><li>For user initiated updates, alert the user of a price change via the extension.</li></ul>|3|
 |User Story 12: Price Tracking|At a user-configurable timeframe, rescan the stored item’s price and update it if there's a change.|5|
 |User story 11: Tracking Page: Item Organization (multiple sellers per item)|If a user has multiple items with the same name, those items should be organized so that the item name appears on the dropdown, and inside the dropdown all the vendors for that item should appear in a table. All previous functionality remains the same: each row in the table in the dropdown is the same as the row in the previous view where all items would be displayed in a single table (refresh, delete, price history)|5|
 |User story 19: Data Filtering and Sorting|<ul><li>For each item, the user can sort the vendors by ascending/descending prices, by ascending/descending first date created or by vendors that had a recent price update (after a certain date inputted by user)</li><li>The sorting and filter should only apply to the vendors within the item dropdown</li></ul>|5|
@@ -68,7 +68,7 @@ Each team member pledges to contribute to at least 1 user story.
 
 |Subtask|Description|
 |--|--|
-|Implement frontend|<ul><li>Create a refresh button that, when clicked, updates the prices of the items which received a price change</li><li>Have the items/seller who experienced price changes be marked with a new color (ex. red)</li><li>Have an alert icon that appears once the price of an item(or items) has changed. When clicked, it should showcase a message indicating which items experienced a price change. When this message is clicked, the user should be redirected to their tracking info page</li></u>|
+|Implement frontend|<ul><li>Create a refresh button that, when clicked, updates the prices of the items which received a price change</li><li>Have an alert that appears if the price of an item(or items) has changed once the refresh for an item's price is done. It should showcase a message indicating which items experienced a price change. </li></u>|
 |Implement backend|Once a price change occurs, send an email to the user regarding this|
 
 <br>

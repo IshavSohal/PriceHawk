@@ -119,10 +119,9 @@ As any type of user, I want to be notified of a price change, so I have the oppo
 
 **Acceptance Criteria** 
 * The user should get an email notification to the email linked to their account (if enabled) upon a price change 
-* The user should get a text notification to the number linked to their account (if enabled) upon a price change
-* These features are enabled in the settings tab (see user story 15)
-* In the toolbox panel (and in the extension icon itself) there should appear a notification alert (like a red exclamation mark), that when clicked, opens a small message saying that the price for one (or more) items have been changed. Upon clicking this message, the user should be re-directed to their tracking info page.
-* The items or sellers that have changed prices recently (within a certain time frame that the user can set themselves in the options tab (user story 15)), should be marked with a new color or text to identify the items/sources that have recently had a price change
+* This feature is enabled in the settings tab (see user story 15)
+* For user initiated updates, alert the user of a price change via the extension.
+
 
 
 ### User story 15: Account / Other Settings
@@ -135,11 +134,9 @@ Setting options include:
 
 1. changing password
 2. changing email
-3. adding/deleting/changing account number
-4. enabling/disabling email push notification
-5. enabling/disabling text notification
-6. setting the time frame of what is considered a new change (12h, 6h, 1h, etc..)
-7. more settings to be added as project progresses
+3. enabling/disabling email push notification
+4. setting the time frame of what is considered a new change (12h, 6h, 1h, etc..)
+5. more settings to be added as project progresses
 
 ### User story 16: Price History of Items
 As a businessman that has a pro account, I want to have a visual representation of the price history of my item(s) (potentially across multiple sources) within a customizable time interval displayed on the x-axis of the graph (last 12 months, last 6 hours, all-time) so that I can analyze the price trends of my item(s) in order to anticipate future trends to benefit my company.   
@@ -200,6 +197,11 @@ As a pro user, I want to be able to view the top most trending items.
 * Trending item is an item that is being tracked my a lot of users.
 * Display the Top K most tracked items 
 
+### User story 23: Guest User Migration
+As a guest user who didn't really use the extension that much in the past and recently started using it more, I want to be able to create a new account (to buy the pro version) and have my local data transferred to the server on my new account so that I don't have to start from scratch.
+
+**Acceptance Crtieria**
+* If the guest user has any data stored locally, and they had just made an account or signed in with an SSO, their data should be transferred to the server.
 
 ### Prioritization  
 User stories at the top of the table have higher priority than the ones at the bottom
@@ -224,6 +226,7 @@ User stories at the top of the table have higher priority than the ones at the b
 |(7) SSO Login|Medium|
 |(9) DOM Element Validation|Medium|
 |(3) Guest User|Low|
+|(23) Guest User Migration|Low|
 |(21) Refresh Button|Low|
 |(22) Trending Items|Low|
 |(20) Optional Item Photo|Low|
