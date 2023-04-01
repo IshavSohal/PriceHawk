@@ -53,6 +53,7 @@ class UserViewSet(viewsets.ModelViewSet):
     
     def get_object(self):
         return get_object_or_404(PHUser, id=self.request.user.id)
+
     
     @action(detail=False, methods=['post'])
     def migrate(self, request):
@@ -63,6 +64,7 @@ class UserViewSet(viewsets.ModelViewSet):
             item.guest_session = None
             item.save()
         return Response(status=status.HTTP_200_OK)
+    
     
 class CreateGoogleUser(CreateAPIView):
     serializer_class = GoogleUserSerializer

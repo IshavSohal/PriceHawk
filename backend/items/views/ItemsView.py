@@ -122,6 +122,7 @@ class RefreshGuestItemView(GenericAPIView):
         price = extract_price(item.url, item.price_html)
         if not price:
             return Response("Error", status=400)
+
         updated = check_updated(item, price)
         item.price = price
         item.save()

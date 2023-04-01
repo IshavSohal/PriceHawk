@@ -44,7 +44,6 @@ const LineChart = ({ item_id }: { item_id: number }) => {
     };
 
     useEffect(() => {
-
         async function getPrices(id: number) {
             const token = await getToken()
             let response
