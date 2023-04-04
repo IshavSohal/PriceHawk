@@ -59,10 +59,12 @@ export default function SignInButton() {
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button onClick={() => navigate("/")}>Cancel</Button>
-            <Button onClick={handleLogin}>Submit</Button>
-        </Container>
-    );
+      <Button onClick={() => navigate("/")}>Cancel</Button>
+      <Button onClick={handleLogin}>Submit</Button>
+      <Button onClick={() => navigate("/forgot-password1")}>Forgot Password</Button>
+    </Container>
+  );
+
 }
 
 async function storeToken(token: string) {

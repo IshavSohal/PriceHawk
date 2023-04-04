@@ -71,7 +71,6 @@ export default function AddItemPage() {
 
     return (
         <>
-
             <Stack style={{ width: "400px" }} spacing={2}>
                 <TextField id="outlined-multiline" label='Item Name' onChange={(e) => {
                     setValues(prevValues => ({ ...prevValues, name: e.target.value }))

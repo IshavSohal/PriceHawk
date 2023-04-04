@@ -7,6 +7,8 @@ import RegisterPage from './pages/RegisterPage'
 import TrackingPage from './pages/TrackingPage'
 import ItemsPricesPage from './pages/Items/[id]';
 import Settings from './pages/SettingsPage';
+import ForgotPasswordPage1 from './pages/ForgotPasswordPage1';
+import ForgotPasswordPage2 from './pages/ForgotPasswordPage2';
 
 export default function App() {
     return (
@@ -15,6 +17,8 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/add-item" element={<AddItemPage />} />
+            <Route path="/forgot-password1" element={<ForgotPasswordPage1 />} />
+            <Route path="/forgot-password2" element={<ForgotPasswordPage2 />} />
             <Route path="/tracking-page" element={<TrackingPage />} />
             <Route path="/items/:id" element={<ItemsPricesPage />} />
             <Route path="/settings" element={<Settings />} />
