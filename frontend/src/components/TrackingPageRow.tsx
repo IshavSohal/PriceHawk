@@ -8,7 +8,8 @@ import {
     DialogTitle,
     TableCell,
     TableRow,
-    Alert
+    Alert,
+    Link
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -69,6 +70,7 @@ export default function TrackingPageRow(props) {
         else {
             await fetch(`http://localhost:8000/items/delete-guest-item/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
         }
+        props.setDel(!props.del)
         setDeleted(true);
     }
 
@@ -78,78 +80,84 @@ export default function TrackingPageRow(props) {
 
     return (
         <>
-        <TableRow
-            key={props.id}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableRow
+                key={props.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
 
-            <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row">
 
-                {props.price_html 
-                    ?
-                    <Button onClick={() => navigate(`/items/${props.id}`)}>
-                        {props.name}
-                    </Button>
-                    : 
-                    <>{props.name}</>}
+                    {props.price_html
+                        ?
+                        <Button onClick={() => navigate(`/items/${props.id}`)}>
+                            {props.vendor_name}
+                        </Button>
+                        :
+                        <>{props.vendor_name}</>}
 
-            </TableCell>
+                </TableCell>
 
-            <TableCell>
-                {price} {refreshing && <CircularProgress size="15px" />}
-            </TableCell>
+                <TableCell>
+                    {price} {refreshing && <CircularProgress size="15px" />}
+                </TableCell>
 
-            <TableCell>
-                {props.price_html 
-                    ?
-                    <Button onClick={handleRefresh}>Refresh</Button>
-                    : 
-                    <>Not Refreshable</>}
-            </TableCell>
+                <TableCell>
+                    {props.price_html
+                        ?
+                        <Button onClick={handleRefresh}>Refresh</Button>
+                        :
+                        <>Not Refreshable</>}
+                </TableCell>
 
-            <TableCell>
-                <Button onClick={() => setOpen(true)}>Delete</Button>
-            </TableCell>
+                <TableCell>
+                    <Button onClick={() => setOpen(true)}>Delete</Button>
+                </TableCell>
 
-            <Dialog
-                open={open}
-                onClose={() => setOpen(false)}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Delete item?"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Do you permanently want to delete this item from the tracking page?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setOpen(false)}>Disagree</Button>
-                    <Button onClick={handleDelete} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                <TableCell>
+                    <Link href={props.url} underline="hover">
+                        {props.url.substring(0, 20) + "..."}
+                    </Link>
+                </TableCell>
 
-
-            <Dialog
-                open={openRefresh}
-                onClose={() => setOpenRefresh(false)}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Price Update"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        {refreshText}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setOpenRefresh(false)}>Ok</Button>
-                </DialogActions>
-            </Dialog>
+                <Dialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Delete item?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Do you permanently want to delete this item from the tracking page?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpen(false)}>Disagree</Button>
+                        <Button onClick={handleDelete} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 
 
-        </TableRow>
+                <Dialog
+                    open={openRefresh}
+                    onClose={() => setOpenRefresh(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Price Update"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {refreshText}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpenRefresh(false)}>Ok</Button>
+                    </DialogActions>
+                </Dialog>
+
+
+            </TableRow>
 
         </>
     );

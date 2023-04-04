@@ -20,7 +20,7 @@ import TrackingPageRow from "../components/TrackingPageRow";
 
 const TrackingPage = () => {
     const [dataNew, setDataNew] = useState([]);
-    const [data, setData] = useState([])
+    const [data, setData] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,44 +46,50 @@ const TrackingPage = () => {
             setDataNew(await response.json());
         }
         getData();
-    }, []);
+    }, [data]);    
+    
 
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 150, maxWidth: 180 }} aria-label="simple table">
-                {dataNew.map((row) => (
-                    <Accordion id={Object.keys(row)[0]}>
-                        <AccordionSummary>
-                            <Typography>
-                                {Object.keys(row)[0]}
-                            </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Vendor</TableCell>
-                                    <TableCell>Price</TableCell>
-                                    <TableCell>Refresh</TableCell>
-                                    <TableCell>Delete</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {row[Object.keys(row)[0]].map((row2) => (
-                                    <TrackingPageRow key={row2.id} {...row2} />
-                                ))}
-                            </TableBody>
-                        </AccordionDetails>
-                    </Accordion>
-                ))}
+                {(dataNew.length && dataNew.length !== 0) 
+                    ?
+                    dataNew.map((row) => (
+                        <Accordion key={Object.keys(row)[0]}>
+                            <AccordionSummary>
+                                <Typography>
+                                    {Object.keys(row)[0]}
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Vendor</TableCell>
+                                        <TableCell>Price</TableCell>
+                                        <TableCell>Refresh</TableCell>
+                                        <TableCell>Delete</TableCell>
+                                        <TableCell>Link</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {row[Object.keys(row)[0]].map((row2) => (
+                                        <TrackingPageRow key={row2.id} id={row2.id} price_html={row2.price_html} vendor_name={row2.vendor_name} url={row2.url} price={row2.price} setDel={setData} del={data}/>
+                                    ))}
+                                </TableBody>
+                            </AccordionDetails>
+                        </Accordion>
+                    ))
+                    :
+                    <></>}
             </Table>
 
-            <br/>
-            <br/>
+            <br />
+            <br />
             <Button onClick={() => navigate(-1)}>
                 Back
             </Button>
-            <br/>
-            <br/>
+            <br />
+            <br />
         </TableContainer>)
 
 };
