@@ -124,6 +124,8 @@ export default function Home() {
                     Sign In with Google
                 </Button>
             </Stack>
+            <br />
+            <br />
         </>
     );
 }

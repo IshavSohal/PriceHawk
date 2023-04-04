@@ -8,7 +8,7 @@ export default function ItemPricesPage() {
     const navigate = useNavigate()
     const { id } = useParams();
     const [itemId, setItemId] = useState(-1);
-
+    
     useEffect(() => {
         if (id) {
             setItemId(parseInt(id, 10));
@@ -18,7 +18,15 @@ export default function ItemPricesPage() {
     return (
         <>
             <LineChart item_id={itemId} />
-            <Button onClick={() => navigate(-1)}>Back</Button>
+
+            <br/>
+            <br/>
+            <Button onClick={() => navigate(-1)}>
+                Back
+            </Button>
+            <br/>
+            <br/>
+
         </>
     )
 }

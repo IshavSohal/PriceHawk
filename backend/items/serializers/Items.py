@@ -3,6 +3,7 @@ from items.models import Item, Price
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.validators import URLValidator
+import tldextract
 
 class ItemSerializer(serializers.ModelSerializer):
     """
@@ -15,8 +16,9 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ['id', 'name', 'price', 'url', 'name_html', 'price_html', 'created', 'guestid']
+        fields = ['id', 'name', 'price', 'vendor_name', 'url', 'name_html', 'price_html', 'created', 'guestid']
         extra_kwargs = {'created': {'read_only': True}, 'guestid': {'write_only': True}}
+
 
     def validate_price(self, value):
         """
@@ -49,7 +51,8 @@ class ItemSerializer(serializers.ModelSerializer):
         request = self.context.get('request', None)
         user = request.user
         name, price, url = validated_data.get('name'), validated_data.get('price'), validated_data.get('url')
-        n_html, p_html = validated_data.get('name_html', None), validated_data.get('price_html', None)
+        n_html, p_html = validated_data.get('name_html', None), validated_data.get('price_html', None)        
+        v_name = tldextract.extract(url).domain
 
         if user.is_authenticated:
             if Item.objects.filter(user=user, name=name, url=url).exists():
@@ -61,7 +64,8 @@ class ItemSerializer(serializers.ModelSerializer):
                 price = price,
                 url = url,
                 name_html = n_html,
-                price_html = p_html
+                price_html = p_html,
+                vendor_name = v_name
             )
         else:
             guest = validated_data.get('guestid', None)
@@ -75,7 +79,8 @@ class ItemSerializer(serializers.ModelSerializer):
                     price = price,
                     url = url,
                     name_html = n_html,
-                    price_html = p_html
+                    price_html = p_html,
+                    vendor_name = v_name
                 )
         
         Price.objects.create(item=item, value=price)
