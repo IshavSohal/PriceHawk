@@ -14,6 +14,9 @@ import Paper from "@mui/material/Paper";
 import { getFingerPrintChrome, getToken } from "../utilities/session";
 import TrackingPageRow from "../components/TrackingPageRow";
 
+// https://stackoverflow.com/questions/67543522/unsupported-media-type-text-plaincharset-utf-8-in-request-nextjs-api-error-w headers for guest request.
+// https://stackoverflow.com/questions/38397894/get-json-key-name for getting object keys
+// https://codesandbox.io/s/71u6bb?file=/demo.tsx for accordion usage
 
 const TrackingPage = () => {
     const [dataNew, setDataNew] = useState([]);
