@@ -93,11 +93,6 @@ export default function AddItemPage() {
                     </Button>
                 </Grid>
 
-                <Button variant="contained" onClick={() => navigate(-1)}>
-                    Cancel
-                </Button>
-                <br/>
-                <br/>
             </Stack>
 
         </>
