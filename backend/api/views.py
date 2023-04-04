@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, Group
 from users.models import PHUser
+from items.models import Item
 from rest_framework import viewsets, permissions, status, authentication
-from rest_framework.decorators import action, authentication_classes, permission_classes, api_view
+from rest_framework.decorators import action, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, get_object_or_404
 from api.serializers import UserSerializer, GoogleUserSerializer
@@ -94,9 +95,19 @@ class UserViewSet(viewsets.ModelViewSet):
 
         else:
             return Response('Invalid key', status=status.HTTP_400_BAD_REQUEST)
-
-
-
+            
+    
+    @action(detail=False, methods=['post'])
+    def migrate(self, request):
+        user = get_object_or_404(PHUser, email=request.data.get('email'))
+        items = Item.objects.filter(guest_session=request.data.get('guestid'))
+        for item in items.all():
+            item.user = user
+            item.guest_session = None
+            item.save()
+        return Response(status=status.HTTP_200_OK)
+    
+    
 class CreateGoogleUser(CreateAPIView):
     serializer_class = GoogleUserSerializer
     

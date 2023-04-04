@@ -1,106 +1,164 @@
 import {
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TableCell,
-  TableRow,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TableCell,
+    TableRow,
+    Alert,
+    Link
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { getToken } from "../utilities/session";
+import { getFingerPrintChrome, getToken } from "../utilities/session";
 
-type Props = {
-  id: number;
-  name: string;
-  price: number;
-};
 
-export default function TrackingPageRow(props: Props) {
-  const [deleted, setDeleted] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
-  const [price, setPrice] = useState(props.price);
-  const navigate = useNavigate();
+export default function TrackingPageRow(props) {
 
-  async function handleRefresh() {
-    setRefreshing(true);
+    const [deleted, setDeleted] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [openRefresh, setOpenRefresh] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+    const [refreshText, setRefreshText] = useState("");
+    const [price, setPrice] = useState(props.price);
+    const navigate = useNavigate();
 
-    const res = await fetch(
-      `http://localhost:8000/items/${props.id}/refresh/`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Token ${await getToken()}`,
-        },
-      }
-    );
-    if (res.ok) {
-      const data = await res.json();
-      setPrice(await data["price"]);
+    async function handleRefresh() {
+        setRefreshing(true);
+        const token = await getToken()
+        let res
+
+        if (token)
+            res = await fetch(
+                `http://localhost:8000/items/${props.id}/refresh/`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                }
+            );
+        else
+            res = await fetch(`http://localhost:8000/items/${props.id}/refresh-guest/${await getFingerPrintChrome()}/`, { method: "POST" });
+
+        if (res.ok) {
+            const data = await res.json();
+            setPrice(await data["price"]);
+            console.log(data)
+            if (data["updated"]) {
+                setRefreshText(data["item"] + " has a new price!")
+                setOpenRefresh(true);
+            }
+        }
+        setRefreshing(false);
     }
-    setRefreshing(false);
-  }
 
-  async function handleDelete() {
-    await fetch(`http://localhost:8000/items/delete-item/${props.id}/`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token ${await getToken()}`,
-      },
-    });
-    setDeleted(true);
-  }
+    async function handleDelete() {
+        const token = await getToken()
 
-  if (deleted) {
-    return <></>;
-  }
+        if (token) {
+            await fetch(`http://localhost:8000/items/delete-item/${props.id}/`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            });
+        }
+        else {
+            await fetch(`http://localhost:8000/items/delete-guest-item/${await getFingerPrintChrome()}/${props.id}/`, { method: "DELETE" });
+        }
+        props.setDel(!props.del)
+        setDeleted(true);
+    }
 
-  return (
-    <TableRow
-      key={props.id}
-      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-    >
-      <TableCell component="th" scope="row">
-        <Button onClick={() => navigate(`/items/${props.id}`)}>
-          {props.name}
-        </Button>
-      </TableCell>
+    if (deleted) {
+        return <></>;
+    }
 
-      <TableCell>
-        {price} {refreshing && <CircularProgress size="15px" />}
-      </TableCell>
+    return (
+        <>
+            <TableRow
+                key={props.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
 
-      <TableCell>
-        <Button onClick={handleRefresh}>Refresh</Button>
-      </TableCell>
+                <TableCell component="th" scope="row">
 
-      <TableCell>
-        <Button onClick={() => setOpen(true)}>Delete</Button>
-      </TableCell>
+                    {props.price_html
+                        ?
+                        <Button onClick={() => navigate(`/items/${props.id}`)}>
+                            {props.vendor_name}
+                        </Button>
+                        :
+                        <>{props.vendor_name}</>}
 
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Delete item?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Do you permanently want to delete this item from the tracking page?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)}>Disagree</Button>
-          <Button onClick={handleDelete} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </TableRow>
-  );
+                </TableCell>
+
+                <TableCell>
+                    {price} {refreshing && <CircularProgress size="15px" />}
+                </TableCell>
+
+                <TableCell>
+                    {props.price_html
+                        ?
+                        <Button onClick={handleRefresh}>Refresh</Button>
+                        :
+                        <>Not Refreshable</>}
+                </TableCell>
+
+                <TableCell>
+                    <Button onClick={() => setOpen(true)}>Delete</Button>
+                </TableCell>
+
+                <TableCell>
+                    <Link href={props.url} underline="hover">
+                        {props.url.substring(0, 20) + "..."}
+                    </Link>
+                </TableCell>
+
+                <Dialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Delete item?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Do you permanently want to delete this item from the tracking page?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpen(false)}>Disagree</Button>
+                        <Button onClick={handleDelete} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+
+                <Dialog
+                    open={openRefresh}
+                    onClose={() => setOpenRefresh(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Price Update"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {refreshText}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpenRefresh(false)}>Ok</Button>
+                    </DialogActions>
+                </Dialog>
+
+
+            </TableRow>
+
+        </>
+    );
 }

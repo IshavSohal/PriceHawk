@@ -13,7 +13,6 @@ export default function Settings() {
     const [password, setPassword] = useState("")
     const [emailnotifications, setEmailNotifications] = useState(false)
     const [priceInterval, setPriceInterval] = useState(12)
-    const [pro, setPro] = useState(false)
     const [google, setGoogle] = useState(false)
 
     useEffect(() => {
@@ -30,7 +29,6 @@ export default function Settings() {
                 setEmail(values.email)
                 setEmailNotifications(values.emailnotifications)
                 setPriceInterval(values.priceInterval)
-                setPro(values.pro)
                 setGoogle(values.google)
                 setOthermail(values.email)
             }
@@ -80,12 +78,12 @@ export default function Settings() {
             setAlert(alert.replace("Email must be filled. ", ""))
         }
 
-        if (isNaN(priceInterval) || priceInterval < 1 || priceInterval > 24) {
+        if (isNaN(priceInterval) || priceInterval < 0 || priceInterval > 24) {
             if (!alert.includes("Price"))
                 setAlert(alert + "Price Interval must be between 1 and 24. ")
             return false
         }
-        else if ((!isNaN(priceInterval) && priceInterval >= 1 && priceInterval <= 24) && alert.includes("Price")) {
+        else if ((!isNaN(priceInterval) && priceInterval >= 0 && priceInterval <= 24) && alert.includes("Price")) {
             setAlert(alert.replace("Price Interval must be between 1 and 24. ", ""))
         }
 
@@ -139,9 +137,7 @@ export default function Settings() {
             fullWidth
             variant="standard"
             value={priceInterval}
-            disabled={!pro}
-            color={(!priceInterval || priceInterval < 1 || priceInterval > 24) ? "error" : "success"}
-            helperText={pro ? "" : "Only Pro Users can change the Price Update Interval"}
+            color={(!priceInterval || priceInterval < 0 || priceInterval > 24) ? "error" : "success"}
             onChange={(e) => setPriceInterval(parseInt(e.target.value))}
         />
         <br />
