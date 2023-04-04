@@ -53,9 +53,9 @@ class GetItemsView(views.APIView):
             #get all vendors for the item
             vendors = Item.objects.none()
             if is_guest:
-                vendors = Item.objects.filter(guest_session=gid, name=item.name).values('vendor_name', 'id', 'price', 'url')
+                vendors = Item.objects.filter(guest_session=gid, name=item.name).values('vendor_name', 'id', 'price', 'url', 'price_html')
             else:
-                vendors = Item.objects.filter(user=user, name=item.name).values('vendor_name', 'id', 'price', 'url')
+                vendors = Item.objects.filter(user=user, name=item.name).values('vendor_name', 'id', 'price', 'url', 'price_html')
         
             item_with_vendors = [{item.name: vendors}]
             result += item_with_vendors
